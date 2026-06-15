@@ -1,0 +1,8 @@
+rcg-site/
+├── index.html                    ← rename RCG_site_step4_live.html to this
+├── fetch_market_data.py
+├── data/
+│   └── market.json               ← create this manually with placeholder JSON
+└── .github/
+    └── workflows/
+        └── update-market-data.yml
