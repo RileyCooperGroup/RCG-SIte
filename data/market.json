@@ -1,6 +1,6 @@
 {
-  "fetched_at": "pending",
-  "date": "pending",
+  "fetched_at": "2026-06-17T17:50:59Z",
+  "date": "2026-06-17",
   "diesel_price": 3.84,
   "diesel_price_prev": 3.84,
   "diesel_delta": 0.0,
@@ -8,5 +8,13 @@
   "fsc_pct": 30.7,
   "fsc_pct_prev": 30.7,
   "fsc_delta": 0.0,
-  "fsc_period": ""
+  "fsc_period": "",
+  "crude_wti": 95.0,
+  "crude_wti_date": "2026-06-08",
+  "crude_wti_prev": 94.32,
+  "crude_wti_delta": 0.68,
+  "freight_index": 138.7,
+  "freight_index_date": "2026-03-01",
+  "freight_index_prev": 138.1,
+  "freight_index_delta": 0.6
 }
