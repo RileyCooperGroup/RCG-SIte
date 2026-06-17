@@ -1626,15 +1626,13 @@ window.addEventListener('DOMContentLoaded', () => {
     if (el) { el.className = 'mc-delta ' + cls; }
   }
 
-  // FSC bracket table (ATA standard, based on DOE weekly diesel)
-  // https://www.ata.org/trucking-works/fuel-surcharge
+  // Calibrated against real carrier FSC tables (e.g. Saia LTL):
+  // baseline ~$1.20/gal, slope ~11.2% FSC per $1.00/gal above baseline
   function calcFSC(dieselPerGal) {
     var d = parseFloat(dieselPerGal);
     if (isNaN(d)) return null;
-    // Simplified linear FSC: (diesel - 1.00) / 0.06 * 1% floored at 0
-    // Scaled to realistic broker FSC bands (12–28%)
-    if (d < 2.00) return 0;
-    var raw = ((d - 2.00) / 0.06) * 1.0;
+    if (d <= 1.20) return 0;
+    var raw = (d - 1.20) * 11.2;
     return Math.min(Math.round(raw * 10) / 10, 50);
   }
 
