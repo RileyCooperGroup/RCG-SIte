@@ -1,0 +1,44 @@
+name: Update Market Data
+
+on:
+  schedule:
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch-and-commit:
+    name: Fetch market data and commit
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch market data
+        env:
+          EIA_API_KEY:  ${{ secrets.EIA_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: python fetch_market_data.py
+
+      - name: Verify output
+        run: |
+          echo "--- data/market.json ---"
+          cat data/market.json
+
+      - name: Commit and push market.json
+        run: |
+          git config user.name  "RCG Data Bot"
+          git config user.email "data-bot@rileycoopergroup.com"
+          git add data/market.json
+          git diff --staged --quiet || git commit -m "chore: update market data $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
