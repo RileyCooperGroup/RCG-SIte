@@ -56,14 +56,20 @@ def fetch_json(url, label):
 def calc_fsc(diesel_price):
     """
     Calculate fuel surcharge % from retail diesel price.
-    Uses a simplified ATA-style sliding scale.
+    Calibrated against real published carrier FSC tables (e.g. Saia LTL):
+      $4.849/gal -> 41.62% actual  | this formula -> ~40.9%
+      $5.250/gal -> 46.12% actual  | this formula -> ~45.4%
+    Baseline ~$1.20/gal, slope ~11.2% FSC per $1.00 increase above baseline.
+    Capped at 50% as a sane upper bound for extreme price spikes.
     Returns float rounded to 1 decimal, or None.
     """
     try:
         d = float(diesel_price)
-        if d < 2.00:
+        baseline = 1.20
+        slope = 11.2  # % FSC per $1.00/gal above baseline
+        if d <= baseline:
             return 0.0
-        raw = ((d - 2.00) / 0.06) * 1.0
+        raw = (d - baseline) * slope
         return round(min(raw, 50.0), 1)
     except (TypeError, ValueError):
         return None
