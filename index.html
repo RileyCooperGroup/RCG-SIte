@@ -8,7 +8,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
---black:#080808;--900:#111111;--800:#1c1c1c;--700:#272727;--600:#363636;--500:#868686;--400:#A8A8A8;--300:#c7c7c7;--200:#dcdcdc;--white:#f4f3f1;--red:#9E0D00;--red2:#b31200;--red-text:#E0463A;--red-dim:rgba(158,13,0,0.09);--green:#3a8f5a;--amber:#b07800;
+--black:#080808;--900:#111111;--800:#1c1c1c;--700:#272727;--600:#363636;--500:#868686;--400:#A8A8A8;--300:#c7c7c7;--200:#dcdcdc;--white:#f4f3f1;--muted:#888888;--red:#9E0D00;--red2:#b31200;--red-text:#E0463A;--red-dim:rgba(158,13,0,0.09);--green:#3a8f5a;--amber:#b07800;
 --display:'Cormorant Garamond',serif;--body:'Inter',sans-serif;--mono:'DM Mono',monospace;
 --ease-out:cubic-bezier(0.16,1,0.3,1);
 --ease-in-out:cubic-bezier(0.4,0,0.2,1);
@@ -211,13 +211,13 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .foot-icon-txt{font-family:var(--display);font-size:13px;font-weight:600;font-style:italic;color:#fff;line-height:1}
 .foot-wm{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--300)}
 .foot-wm span{color:var(--red)}
-.foot-tag{font-size:12px;color:var(--600);line-height:1.7}
-.foot-col-title{font-family:var(--mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--600);margin-bottom:1.1rem}
+.foot-tag{font-size:12px;color:var(--muted);line-height:1.7}
+.foot-col-title{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.1rem}
 .foot-links{list-style:none}
 .foot-links li{padding:4px 0;font-size:12px;color:var(--500);cursor:pointer;transition:color 0.15s,padding-left 0.15s}
 .foot-links li:hover{color:var(--white);padding-left:5px}
 .foot-bottom{max-width:1360px;margin:2.5rem auto 0;border-top:.5px solid rgba(255,255,255,.05);padding-top:1.25rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
-.foot-legal{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--700)}
+.foot-legal{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
 /* ══ IMAGERY SHARED ══ */
 .so-logo-icon{width:22px;height:22px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:10px;font-weight:600;font-style:italic;color:#fff;flex-shrink:0}
@@ -265,7 +265,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .so-ltab{font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--500);padding:8px 12px;border-bottom:1.5px solid transparent;cursor:pointer;transition:color 0.15s,border-bottom-color 0.15s}
 .so-ltab.active{color:var(--white);border-bottom-color:var(--red)}
 .so-ltab:hover{color:var(--300)}
-.so-dg{padding:6px 13px 2px;font-family:var(--mono);font-size:7px;letter-spacing:0.12em;text-transform:uppercase;color:var(--600)}
+.so-dg{padding:6px 13px 2px;font-family:var(--mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
 .so-row{display:grid;grid-template-columns:185px 1fr 155px;align-items:center;padding:8px 13px;border-bottom:0.5px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.12s,border-left-color 0.12s;gap:6px;border-left:2px solid transparent}
 .so-row:hover{background:rgba(255,255,255,0.03);border-left-color:rgba(255,255,255,0.1)}
 .so-row.sel{background:rgba(158,13,0,0.05);border-left-color:var(--red)}
@@ -284,7 +284,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .so-dtab{font-family:var(--mono);font-size:7.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--500);padding:7px 9px;border-bottom:1.5px solid transparent;cursor:pointer;transition:color 0.15s}
 .so-dtab.active{color:var(--white);border-bottom-color:var(--red)}
 .so-dbody{padding:11px 13px}
-.so-dfl{font-family:var(--mono);font-size:7px;letter-spacing:0.14em;text-transform:uppercase;color:var(--600);margin-bottom:3px}
+.so-dfl{font-family:var(--mono);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
 .so-dfv{font-size:10.5px;color:var(--200);margin-bottom:9px}
 .so-dfv.mono{font-family:var(--mono);font-size:8.5px;color:#6b9fd4}
 .so-credit-box{background:rgba(255,255,255,0.02);border:0.5px solid rgba(255,255,255,0.06);padding:7px 9px;margin-bottom:9px}
@@ -309,7 +309,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .rv-panel{background:#090d12;border-left:0.5px solid rgba(255,255,255,0.06);padding:14px;overflow-y:auto;max-height:280px}
 .rv-sec{margin-bottom:12px;padding-bottom:12px;border-bottom:0.5px solid rgba(255,255,255,0.05)}
 .rv-sec:last-child{border:none;margin-bottom:0;padding-bottom:0}
-.rv-lbl{font-family:var(--mono);font-size:7px;letter-spacing:0.16em;text-transform:uppercase;color:var(--600);margin-bottom:4px}
+.rv-lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 .rv-val{font-size:10.5px;color:var(--200);line-height:1.5}
 .rv-val.mono{font-family:var(--mono);font-size:8.5px;color:var(--300)}
 .rv-stop{display:flex;gap:8px;padding:6px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)}
@@ -363,7 +363,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .p-cell.doc:hover{color:var(--red2);text-decoration:underline}
 .p-cell.faded{color:var(--500)}
 .p-footer{padding:8px 16px;border-top:0.5px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.01)}
-.p-footer-note{font-family:var(--mono);font-size:6.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--600)}
+.p-footer-note{font-family:var(--mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
 .p-footer-exports{display:flex;gap:4px}
 .p-exp{font-family:var(--mono);font-size:6.5px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border:0.5px solid rgba(255,255,255,0.08);color:var(--500);cursor:pointer;transition:all 0.15s}
 .p-exp:hover{border-color:rgba(255,255,255,0.2);color:var(--300)}
@@ -464,11 +464,11 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .chart-side{background:var(--800);padding:22px 20px}
 .panel-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
 .panel-title{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--300)}
-.panel-meta{font-family:var(--mono);font-size:7.5px;color:var(--600);text-align:right}
+.panel-meta{font-family:var(--mono);font-size:9.5px;color:var(--muted);text-align:right}
 .chart-area{position:relative;height:100px}
 .chart-area svg{width:100%;height:100%}
 .chart-axis{display:flex;justify-content:space-between;margin-top:4px}
-.chart-axis span{font-family:var(--mono);font-size:7.5px;color:var(--600)}
+.chart-axis span{font-family:var(--mono);font-size:9.5px;color:var(--muted)}
 .chart-legend{display:flex;gap:16px;margin-top:11px;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;color:var(--300)}
 .sm-metric{margin-bottom:18px;padding-bottom:18px;border-bottom:.5px solid rgba(255,255,255,.06)}
@@ -504,10 +504,10 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .vol-bar{height:4px;background:rgba(255,255,255,.07);margin:9px 0 4px;position:relative}
 .vol-fill{height:100%;background:linear-gradient(to right,var(--green),var(--amber),var(--red))}
 .vol-ptr{position:absolute;top:-3px;width:2px;height:10px;background:var(--white)}
-.vol-lbls{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--600);text-transform:uppercase}
+.vol-lbls{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--muted);text-transform:uppercase}
 .db-foot{background:var(--black);padding:9px 2.5rem;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
 .db-foot-txt{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--400)}
-.src-tag{font-family:var(--mono);font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--600);border:.5px solid rgba(255,255,255,.08);padding:2px 6px;display:inline-block;transition:border-color 0.15s,color 0.15s}
+.src-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:.5px solid rgba(255,255,255,.08);padding:2px 6px;display:inline-block;transition:border-color 0.15s,color 0.15s}
 .src-tag:hover{border-color:rgba(255,255,255,0.2);color:var(--400)}
 .src-tags{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 
@@ -617,7 +617,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .video-ph:hover .vph-icon{transform:scale(1.1);background:rgba(158,13,0,0.25)}
 .vph-play{font-size:16px;color:var(--red);margin-left:3px}
 .vph-title{font-family:var(--display);font-size:17px;font-weight:600;color:var(--white);text-transform:uppercase;margin-bottom:.4rem;position:relative}
-.vph-sub{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--600);position:relative}
+.vph-sub{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);position:relative}
 .form-wrap{background:var(--800);padding:2.5rem;border:.5px solid rgba(255,255,255,.07)}
 .fg-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:1.4rem;padding-bottom:.7rem;border-bottom:.5px solid rgba(158,13,0,.2);display:flex;align-items:center;gap:10px}
 .fg-lbl::before{content:'';width:14px;height:.5px;background:var(--red)}
@@ -643,15 +643,15 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .form-submit:hover{background:var(--red2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(158,13,0,0.25)}
 .form-submit:hover::before{opacity:1}
 .form-submit:active{transform:translateY(0);box-shadow:none}
-.form-note{font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--600);margin-top:1.4rem;line-height:1.8;text-align:center}
-.form-closing{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--600);text-align:center;margin-top:1.75rem;padding-bottom:5rem}
+.form-note{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:1.4rem;line-height:1.8;text-align:center}
+.form-closing{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:1.75rem;padding-bottom:5rem}
 .success-state{display:none;text-align:center;padding:4rem 2.5rem;background:var(--800);border:.5px solid rgba(255,255,255,.07)}
 .ss-icon{width:48px;height:48px;border-radius:50%;background:rgba(158,13,0,.12);border:.5px solid rgba(158,13,0,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem}
 .ss-icon-txt{font-family:var(--display);font-size:19px;font-weight:600;font-style:italic;color:var(--red)}
 .ss-head{font-family:var(--display);font-size:clamp(20px,2.5vw,30px);font-weight:600;color:var(--white);text-transform:uppercase;margin-bottom:.9rem}
 .ss-head em{font-style:italic;color:var(--200);font-weight:400}
 .ss-body{font-size:13px;color:var(--400);line-height:1.85;max-width:340px;margin:0 auto}
-.ss-note{font-family:var(--mono);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--600);margin-top:1.4rem}
+.ss-note{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:1.4rem}
 
 /* ══ HERO ENTRANCE ANIMATION ══ */
 @keyframes heroFadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
@@ -857,7 +857,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
           </div>
         </div>
       </div>
-      <div style="margin-top:1rem;font-family:var(--mono);font-size:7.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--600);text-align:right">Proprietary platform · Built by TIS · Day one access</div>
+      <div style="margin-top:1rem;font-family:var(--mono);font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-align:right">Proprietary platform · Built by TIS · Day one access</div>
     </div>
   </div>
   <hr class="div">
@@ -868,7 +868,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       <div style="background:var(--900);padding:2.75rem 2.25rem"><div style="font-family:var(--display);font-size:18px;font-weight:600;color:var(--white);text-transform:uppercase;margin-bottom:1.75rem;padding-bottom:1.1rem;border-bottom:.5px solid rgba(255,255,255,.08)">This is for you.</div>
         <ul class="list-arrow"><li><span></span>Sales leaders ready to bet on themselves</li><li><span></span>Operators with existing books seeking leverage</li><li><span></span>Entrepreneurs who value ownership over security</li><li><span></span>Professionals ready to build an asset — not hold a title</li></ul></div>
       <div style="background:var(--800);padding:2.75rem 2.25rem"><div style="font-family:var(--display);font-size:18px;font-weight:600;color:var(--400);text-transform:uppercase;margin-bottom:1.75rem;padding-bottom:1.1rem;border-bottom:.5px solid rgba(255,255,255,.08)">This is not for you.</div>
-        <ul class="list-arrow"><li style="color:var(--600)"><span></span>Those seeking guaranteed income</li><li style="color:var(--600)"><span></span>Those unwilling to be accountable</li><li style="color:var(--600)"><span></span>Those comfortable being a number inside a massive brokerage</li></ul></div>
+        <ul class="list-arrow"><li style="color:var(--muted)"><span></span>Those seeking guaranteed income</li><li style="color:var(--muted)"><span></span>Those unwilling to be accountable</li><li style="color:var(--muted)"><span></span>Those comfortable being a number inside a massive brokerage</li></ul></div>
       <div style="grid-column:1/-1;background:var(--black);padding:1.75rem 2.25rem;display:flex;align-items:center;justify-content:center;border-top:.5px solid rgba(255,255,255,.06)"><p style="font-family:var(--display);font-size:18px;font-weight:600;font-style:italic;color:var(--400);text-align:center">We build <strong style="color:var(--white);font-style:normal">business owners</strong> — not employees.</p></div>
     </div>
   </section>
@@ -957,7 +957,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       <div class="acb-eyebrow">Private Access</div>
       <h2 class="dh" style="text-align:center;margin-bottom:1rem">By Invitation.<br><em>Or By Qualification.</em></h2>
       <p style="font-size:15px;color:var(--400);line-height:1.85;max-width:420px;margin:0 auto 1rem">If you believe you belong here, request a private and confidential conversation.</p>
-      <p style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--600);margin-bottom:2.5rem">All inquiries are reviewed. Not all are accepted.</p>
+      <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem">All inquiries are reviewed. Not all are accepted.</p>
       <div class="actions" style="justify-content:center"><button class="btn-r" onclick="go('access')">Request Private Access</button><button class="btn-o" onclick="go('builders')">For Business Builders</button></div>
     </div>
   </div>
@@ -969,7 +969,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
   <div style="min-height:55vh;display:flex;flex-direction:column;justify-content:center;padding:5rem 2.5rem 4rem;max-width:1360px;margin:0 auto" class="hero-animate">
     <div class="eyebrow">The Platform</div>
     <h1 class="dh" style="margin-bottom:1.75rem">The <em>Platform.</em></h1>
-    <p class="hero-sub" style="font-size:15px;color:var(--300);max-width:520px;line-height:1.85">Every component was selected, tested, and refined by operators who have lived the problems it solves. Deployed on day one. No build time. No extra cost.</p>
+    <p class="hero-sub" style="font-size:15px;color:var(--300);max-width:520px;line-height:1.85">Every component was selected, tested, and refined by operators who have lived the problems it solves. Deployed on day one. Zero build time. Reduced cost through platform buying power.</p>
   </div>
   <hr class="div">
   <section>
@@ -983,15 +983,15 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
             <div class="so-stats-bar"><div class="so-stxt">Predictions USD · Gross P/L: <span class="g">12,440.00</span></div><div class="so-stxt">Expenditure: <span class="a">,187,200.00</span></div><div class="so-stxt">Total Income: <span class="g">,499,640.00</span></div><div class="so-stxt">CAD Gross P/L: <span class="g">18,220.00</span></div></div>
             <div class="so-list-tabs"><div class="so-ltab">Current</div><div class="so-ltab active">All Shipments</div><div class="so-ltab">Starred</div></div>
             <div class="so-dg">PU 06/11/2026</div>
-            <div class="so-row"><div><div class="so-row-id">RCXX4412 <span class="so-badge badge-dispatched">Dispatched</span></div><div class="so-row-mode"><span class="mode-pill mode-dv">Dry Van</span></div></div><div class="so-route-cell"><span class="org">Atlanta, GA</span><span class="arr">→</span>Toronto, ON<br><span style="font-size:7px;color:var(--600)">06/11 · 07:00 – 06/13 · 15:00 ET</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,850 USD</div><div class="so-cost-ln">Carrier: ,480 USD</div><div class="so-profit">+70</div></div></div>
+            <div class="so-row"><div><div class="so-row-id">RCXX4412 <span class="so-badge badge-dispatched">Dispatched</span></div><div class="so-row-mode"><span class="mode-pill mode-dv">Dry Van</span></div></div><div class="so-route-cell"><span class="org">Atlanta, GA</span><span class="arr">→</span>Toronto, ON<br><span style="font-size:9.5px;color:var(--muted)">06/11 · 07:00 – 06/13 · 15:00 ET</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,850 USD</div><div class="so-cost-ln">Carrier: ,480 USD</div><div class="so-profit">+70</div></div></div>
             <div class="so-dg">PU 06/12/2026</div>
-            <div class="so-row"><div><div class="so-row-id">RCXX4415 <span class="so-badge badge-ready">Ready</span></div><div class="so-row-mode"><span class="mode-pill mode-rf">Reefer</span></div></div><div class="so-route-cell"><span class="org">Fresno, CA</span><span class="arr">→</span>Calgary, AB<br><span style="font-size:7px;color:var(--600)">06/12 · 06:00 – 06/16 · 12:00 MT</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,200 CAD</div><div class="so-cost-ln">Carrier: ,400 CAD</div><div class="so-profit">+00</div></div></div>
+            <div class="so-row"><div><div class="so-row-id">RCXX4415 <span class="so-badge badge-ready">Ready</span></div><div class="so-row-mode"><span class="mode-pill mode-rf">Reefer</span></div></div><div class="so-route-cell"><span class="org">Fresno, CA</span><span class="arr">→</span>Calgary, AB<br><span style="font-size:9.5px;color:var(--muted)">06/12 · 06:00 – 06/16 · 12:00 MT</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,200 CAD</div><div class="so-cost-ln">Carrier: ,400 CAD</div><div class="so-profit">+00</div></div></div>
             <div class="so-dg">PU 06/14/2026</div>
-            <div class="so-row"><div><div class="so-row-id">RCXX4420 <span class="so-badge badge-booked">Booked</span></div><div class="so-row-mode"><span class="mode-pill mode-fb">Flatbed w/ Tarps</span></div></div><div class="so-route-cell"><span class="org">Houston, TX</span><span class="arr">→</span>Edmonton, AB<br><span style="font-size:7px;color:var(--600)">06/14 · 08:00 – 06/18 · 16:00 MT</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,600 USD</div><div class="so-cost-ln">Carrier: ,750 USD</div><div class="so-profit">+50</div></div></div>
+            <div class="so-row"><div><div class="so-row-id">RCXX4420 <span class="so-badge badge-booked">Booked</span></div><div class="so-row-mode"><span class="mode-pill mode-fb">Flatbed w/ Tarps</span></div></div><div class="so-route-cell"><span class="org">Houston, TX</span><span class="arr">→</span>Edmonton, AB<br><span style="font-size:9.5px;color:var(--muted)">06/14 · 08:00 – 06/18 · 16:00 MT</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,600 USD</div><div class="so-cost-ln">Carrier: ,750 USD</div><div class="so-profit">+50</div></div></div>
             <div class="so-dg">PU 06/15/2026</div>
-            <div class="so-row sel"><div><div class="so-row-id">RCXX4428 <span class="so-badge badge-transit">In-Transit</span></div><div class="so-row-mode"><span class="mode-pill mode-dv">Dry Van</span></div></div><div class="so-route-cell"><span class="org">Chicago, IL</span><span class="arr">→</span>Vancouver, BC<br><span style="font-size:7px;color:var(--600)">06/15 · 09:00 – 06/19 · 14:00 PT</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,800 USD</div><div class="so-cost-ln">Carrier: ,100 USD</div><div class="so-profit">+00</div></div></div>
-            <div class="so-row"><div><div class="so-row-id">RCXX4433 <span class="so-badge badge-ready">Ready</span></div><div class="so-row-mode"><span class="mode-pill mode-ltl">LTL</span></div></div><div class="so-route-cell"><span class="org">Detroit, MI</span><span class="arr">→</span>Montréal, QC<br><span style="font-size:7px;color:var(--600)">06/16 · 08:00 – 06/17 · 17:00 ET</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: 40 CAD</div><div class="so-cost-ln">Carrier: 10 CAD</div><div class="so-profit">+30</div></div></div>
-            <div class="so-row"><div><div class="so-row-id">RCXX4440 <span class="so-badge badge-archived">Archived</span></div><div class="so-row-mode"><span class="mode-pill mode-rl">Rail</span></div></div><div class="so-route-cell"><span class="org">Seattle, WA</span><span class="arr">→</span>Winnipeg, MB<br><span style="font-size:7px;color:var(--600)">06/01 · 00:00 – 06/05 CT</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,600 CAD</div><div class="so-cost-ln">Carrier: ,050 CAD</div><div class="so-profit">+50</div></div></div>
+            <div class="so-row sel"><div><div class="so-row-id">RCXX4428 <span class="so-badge badge-transit">In-Transit</span></div><div class="so-row-mode"><span class="mode-pill mode-dv">Dry Van</span></div></div><div class="so-route-cell"><span class="org">Chicago, IL</span><span class="arr">→</span>Vancouver, BC<br><span style="font-size:9.5px;color:var(--muted)">06/15 · 09:00 – 06/19 · 14:00 PT</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,800 USD</div><div class="so-cost-ln">Carrier: ,100 USD</div><div class="so-profit">+00</div></div></div>
+            <div class="so-row"><div><div class="so-row-id">RCXX4433 <span class="so-badge badge-ready">Ready</span></div><div class="so-row-mode"><span class="mode-pill mode-ltl">LTL</span></div></div><div class="so-route-cell"><span class="org">Detroit, MI</span><span class="arr">→</span>Montréal, QC<br><span style="font-size:9.5px;color:var(--muted)">06/16 · 08:00 – 06/17 · 17:00 ET</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: 40 CAD</div><div class="so-cost-ln">Carrier: 10 CAD</div><div class="so-profit">+30</div></div></div>
+            <div class="so-row"><div><div class="so-row-id">RCXX4440 <span class="so-badge badge-archived">Archived</span></div><div class="so-row-mode"><span class="mode-pill mode-rl">Rail</span></div></div><div class="so-route-cell"><span class="org">Seattle, WA</span><span class="arr">→</span>Winnipeg, MB<br><span style="font-size:9.5px;color:var(--muted)">06/01 · 00:00 – 06/05 CT</span></div><div class="so-costs-cell"><div class="so-cost-ln">Shipper: ,600 CAD</div><div class="so-cost-ln">Carrier: ,050 CAD</div><div class="so-profit">+50</div></div></div>
           </div>
           <div class="so-detail">
             <div class="so-dh"><span class="so-did">RCXX4428 · FTL · USD</span><span style="font-family:var(--mono);font-size:7.5px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;background:rgba(13,122,110,0.2);color:#2dd4bf">In-Transit</span></div>
@@ -1042,7 +1042,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
             <div class="snode"><div class="sn-cat">GPS Tracking</div><div class="sn-name">FourKites</div><div class="sn-desc">Live shipment visibility. Predictive ETAs. Real-time exception management.</div><div class="sn-partner">fourkites.com · Integrated</div></div>
             <div class="snode"><div class="sn-cat">GPS Tracking</div><div class="sn-name">MacroPoint</div><div class="sn-desc">ELD-integrated real-time tracking. Direct carrier GPS. Check-call elimination.</div><div class="sn-partner">macropoint.com · Integrated</div></div>
           </div>
-          <div style="text-align:center;margin-top:1.75rem;padding-top:1.5rem;border-top:0.5px solid rgba(255,255,255,0.06)"><div style="font-family:var(--mono);font-size:7.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--500)">Full stack · Every RCG operator · Day one · No build time · No additional cost</div></div>
+          <div style="text-align:center;margin-top:1.75rem;padding-top:1.5rem;border-top:0.5px solid rgba(255,255,255,0.06)"><div style="font-family:var(--mono);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--400)">Full stack · Every RCG operator · Day one · Zero build time · Reduced cost via platform buying power</div></div>
         </div>
       </div>
     </div>
@@ -1065,7 +1065,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
   <div class="wells-band">
     <div class="wells-inner">
       <div class="reveal-left"><div class="sec-label">The Journey</div><h2 class="dh">Every Builder<br><em>Starts Somewhere.</em></h2><div style="font-size:14px;color:var(--300);line-height:1.9;margin-top:2rem"><p style="margin-bottom:1rem">The common denominator wasn't experience.</p><p style="font-family:var(--display);font-size:clamp(17px,1.9vw,22px);font-weight:600;color:var(--white)">It was commitment.</p><p style="margin-top:1.5rem;padding-top:1.5rem;border-top:.5px solid rgba(255,255,255,.07)">Success inside RCG is determined by what you're willing to build.</p></div></div>
-      <div class="reveal-right"><div style="border:.5px solid rgba(255,255,255,.07);padding:2.75rem"><div style="font-family:var(--display);font-size:72px;font-weight:600;color:var(--700);line-height:1;margin-bottom:1rem">6+</div><div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--500);margin-bottom:1.5rem">Years of Consistent Results</div><div style="font-family:var(--display);font-size:clamp(16px,1.8vw,20px);font-weight:400;font-style:italic;color:var(--300);line-height:1.45">"The system works. Performance is rewarded.<br><strong style="color:var(--white);font-style:normal;font-weight:600">Ownership compounds.</strong>"</div></div></div>
+      <div class="reveal-right"><div style="border:.5px solid rgba(255,255,255,.07);padding:2.75rem"><div style="font-family:var(--display);font-size:72px;font-weight:600;color:var(--white);line-height:1;margin-bottom:1rem">6+</div><div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--500);margin-bottom:1.5rem">Years of Consistent Results</div><div style="font-family:var(--display);font-size:clamp(16px,1.8vw,20px);font-weight:400;font-style:italic;color:var(--300);line-height:1.45">"The system works. Performance is rewarded.<br><strong style="color:var(--white);font-style:normal;font-weight:600">Ownership compounds.</strong>"</div></div></div>
     </div>
   </div>
   <section>
@@ -1337,7 +1337,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(158,13,0,0.04) 0%,transparent 70%)"></div>
       <div style="width:46px;height:46px;border-radius:50%;background:rgba(158,13,0,.15);border:.5px solid rgba(158,13,0,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;position:relative;transition:transform 0.3s var(--ease-out),background 0.3s" id="vphIcon"><div style="font-size:16px;color:var(--red);margin-left:3px">▶</div></div>
       <div style="font-family:var(--display);font-size:17px;font-weight:600;color:var(--white);text-transform:uppercase;margin-bottom:.4rem;position:relative">Watch: A Message From The Founder</div>
-      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--600);position:relative">Video — Coming Soon · Approx. 4 min</div>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);position:relative">Video — Coming Soon · Approx. 4 min</div>
     </div>
   </div>
 
