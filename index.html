@@ -176,7 +176,7 @@ h2.dh{font-family:var(--display);font-size:clamp(28px,4vw,54px);font-weight:600;
 .pv-age{font-family:var(--display);font-size:42px;font-weight:600;color:var(--white);line-height:1;margin-bottom:.35rem}
 .pv-label{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--500);margin-bottom:1rem}
 .pv-body{font-size:12px;color:var(--400);line-height:1.7}
-.proven-footer{background:var(--800);border-top:.5px solid rgba(255,255,255,.07);padding:2rem;display:grid;grid-template-columns:repeat(3,1fr);margin-top:1px}
+.proven-footer{background:var(--800);border-top:.5px solid rgba(255,255,255,.07);padding:2rem;display:grid;grid-template-columns:repeat(2,1fr);margin-top:1px}
 .pf-item{padding:0 1.5rem;border-right:.5px solid rgba(255,255,255,.07);text-align:center}
 .pf-item:first-child{padding-left:0}
 .pf-item:last-child{border-right:none}
@@ -916,8 +916,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       <div class="proven-card"><div class="pv-age">3x</div><div class="pv-label">Cross-Border Operators</div><div class="pv-body">Cross-border operators expanding across Canada, the US, and Mexico.</div></div>
     </div>
     <div class="proven-footer reveal">
-      <div class="pf-item"><div class="pf-val" id="pf-agents">13</div><div class="pf-lbl">Active Agents</div></div>
-      <div class="pf-item"><div class="pf-val" id="pf-sixfig">6 of 13</div><div class="pf-lbl">Earning Six Figures+</div></div>
+      <div class="pf-item"><div class="pf-val" id="pf-sixfig">100%</div><div class="pf-lbl">Of Full-Time Agents Earning Six Figures+</div></div>
       <div class="pf-item"><div class="pf-val" id="pf-loads">2,250+</div><div class="pf-lbl">Loads Booked <span id="pf-asof" style="font-size:0.6em;color:var(--500)">(2026 YTD)</span></div></div>
     </div>
   </section>
@@ -1411,8 +1410,9 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
         <div class="sec-label" style="justify-content:center">By The Numbers</div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06)">
           <div style="background:var(--800);padding:1.75rem 1.25rem;text-align:center">
-            <div style="font-family:var(--display);font-size:34px;font-weight:600;color:var(--white)" id="pa-sixfig">6 of 13</div>
-            <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--500);margin-top:.5rem">Agents Earning Six Figures+</div>
+            <div style="font-family:var(--display);font-size:34px;font-weight:600;color:var(--white)" id="pa-sixfig">100%</div>
+            <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--500);margin-top:.5rem">Of Full-Time Agents Earning Six Figures+</div>
+            <div style="font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.6rem" id="pa-ft-detail">6 of 6 Full-Time Agents</div>
           </div>
           <div style="background:var(--800);padding:1.75rem 1.25rem;text-align:center">
             <div style="font-family:var(--display);font-size:34px;font-weight:600;color:var(--white)" id="pa-loads">2,250+</div>
@@ -1745,13 +1745,14 @@ window.addEventListener('DOMContentLoaded', () => {
     // ── Business stats (updated monthly via the private stats tool) ────────
     if (data.business_stats) {
       var bs = data.business_stats;
-      if (bs.active_agents != null) {
-        setText('pf-agents', bs.active_agents);
-      }
-      if (bs.agents_six_figure != null && bs.active_agents != null) {
-        var sixFigStr = bs.agents_six_figure + ' of ' + bs.active_agents;
-        setText('pf-sixfig', sixFigStr);
-        setText('pa-sixfig', sixFigStr);
+      // Six-figure rate is measured against FULL-TIME agents specifically,
+      // not total roster (which includes part-time/new agents still ramping).
+      if (bs.agents_six_figure != null && bs.agents_full_time != null && bs.agents_full_time > 0) {
+        var pct = Math.round((bs.agents_six_figure / bs.agents_full_time) * 100);
+        var pctStr = pct + '%';
+        setText('pf-sixfig', pctStr);
+        setText('pa-sixfig', pctStr);
+        setText('pa-ft-detail', bs.agents_six_figure + ' of ' + bs.agents_full_time + ' Full-Time Agents');
       }
       if (bs.loads_booked_ytd != null) {
         var loadsStr = Number(bs.loads_booked_ytd).toLocaleString() + '+';
