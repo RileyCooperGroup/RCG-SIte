@@ -8,7 +8,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
---black:#080808;--900:#111111;--800:#1c1c1c;--700:#272727;--600:#363636;--500:#525252;--400:#7B7B7B;--300:#9e9e9e;--200:#c6c6c6;--white:#f4f3f1;--red:#9E0D00;--red2:#b31200;--red-dim:rgba(158,13,0,0.09);--green:#3a8f5a;--amber:#b07800;
+--black:#080808;--900:#111111;--800:#1c1c1c;--700:#272727;--600:#363636;--500:#868686;--400:#A8A8A8;--300:#c7c7c7;--200:#dcdcdc;--white:#f4f3f1;--red:#9E0D00;--red2:#b31200;--red-text:#E0463A;--red-dim:rgba(158,13,0,0.09);--green:#3a8f5a;--amber:#b07800;
 --display:'Cormorant Garamond',serif;--body:'Inter',sans-serif;--mono:'DM Mono',monospace;
 --ease-out:cubic-bezier(0.16,1,0.3,1);
 --ease-in-out:cubic-bezier(0.4,0,0.2,1);
@@ -38,10 +38,11 @@ body{background:var(--900);color:var(--white);font-family:var(--body);font-size:
 
 /* ══ NAV ══ */
 nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(8,8,8,0.97);backdrop-filter:blur(16px);border-bottom:0.5px solid rgba(255,255,255,0.06);transition:background 0.3s}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1360px;margin:0 auto;padding:0 2.5rem}
-.nav-logo{display:flex;align-items:center;cursor:pointer;flex-shrink:0;transition:opacity 0.2s;margin-right:3rem}
+.nav-inner{display:flex;align-items:center;justify-content:flex-start;height:60px;max-width:1360px;margin:0 auto;padding:0 2.5rem}
+.nav-spacer{flex:1}
+.nav-logo{display:flex;align-items:center;cursor:pointer;flex-shrink:0;transition:opacity 0.2s;margin-right:2.75rem}
 .nav-logo:hover{opacity:0.8}
-.nav-wm{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--white)}
+.nav-wm{font-family:var(--body);font-size:12.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--white)}
 .nav-wm span{color:inherit}
 .nav-links{display:flex;gap:1.5rem;align-items:center}
 .nav-link{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--400);cursor:pointer;transition:color 0.18s;white-space:nowrap;padding:4px 0;border-bottom:1px solid transparent;position:relative}
@@ -187,7 +188,7 @@ h2.dh{font-family:var(--display);font-size:clamp(28px,4vw,54px);font-weight:600;
 .std-inner{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
 .no-list{list-style:none;margin-top:2.5rem}
 .no-list li{display:flex;align-items:center;gap:16px;padding:1rem 0;border-bottom:.5px solid rgba(255,255,255,.07)}
-.no-word{font-family:var(--display);font-size:26px;font-weight:600;color:var(--700);line-height:1;min-width:78px;text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:1.5px}
+.no-word{font-family:var(--display);font-size:26px;font-weight:600;color:var(--500);line-height:1;min-width:78px;text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red-text);text-decoration-thickness:1.5px}
 .no-label{font-size:12px;color:var(--400)}
 .std-stmt{font-family:var(--display);font-size:clamp(20px,2.2vw,30px);font-weight:400;font-style:italic;color:var(--300);line-height:1.5;margin-top:1rem}
 .std-stmt strong{font-weight:600;color:var(--white);font-style:normal;display:block;margin-bottom:.5rem}
@@ -449,7 +450,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .mc{background:var(--800);padding:20px 22px 18px;transition:background 0.15s}
 .mc:hover{background:#242424}
 .mc.acc{border-top:2px solid var(--red)}
-.mc-lbl{font-family:var(--mono);font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--500);margin-bottom:9px}
+.mc-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--400);margin-bottom:9px}
 .mc-val{font-family:var(--display);font-size:38px;font-weight:600;color:var(--white);line-height:1}
 .mc-unit{font-family:var(--mono);font-size:11px;color:var(--400);margin-left:3px}
 .mc-delta{display:inline-flex;align-items:center;gap:4px;margin-top:7px;font-family:var(--mono);font-size:8.5px;padding:2px 7px}
@@ -462,17 +463,17 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .chart-main{background:var(--800);padding:22px 26px}
 .chart-side{background:var(--800);padding:22px 20px}
 .panel-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
-.panel-title{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--400)}
+.panel-title{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--300)}
 .panel-meta{font-family:var(--mono);font-size:7.5px;color:var(--600);text-align:right}
 .chart-area{position:relative;height:100px}
 .chart-area svg{width:100%;height:100%}
 .chart-axis{display:flex;justify-content:space-between;margin-top:4px}
 .chart-axis span{font-family:var(--mono);font-size:7.5px;color:var(--600)}
 .chart-legend{display:flex;gap:16px;margin-top:11px;flex-wrap:wrap}
-.legend-item{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:8.5px;color:var(--400)}
+.legend-item{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;color:var(--300)}
 .sm-metric{margin-bottom:18px;padding-bottom:18px;border-bottom:.5px solid rgba(255,255,255,.06)}
 .sm-metric:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-.sm-lbl{font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--500);margin-bottom:7px}
+.sm-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--400);margin-bottom:7px}
 .sm-val{font-family:var(--display);font-size:30px;font-weight:600;color:var(--white);line-height:1}
 .sm-unit{font-family:var(--mono);font-size:10px;color:var(--400);margin-left:2px}
 .sm-bar{height:3px;background:rgba(255,255,255,.08);margin:9px 0 5px;overflow:hidden}
@@ -505,7 +506,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .vol-ptr{position:absolute;top:-3px;width:2px;height:10px;background:var(--white)}
 .vol-lbls{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--600);text-transform:uppercase}
 .db-foot{background:var(--black);padding:9px 2.5rem;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
-.db-foot-txt{font-family:var(--mono);font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--600)}
+.db-foot-txt{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--400)}
 .src-tag{font-family:var(--mono);font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--600);border:.5px solid rgba(255,255,255,.08);padding:2px 6px;display:inline-block;transition:border-color 0.15s,color 0.15s}
 .src-tag:hover{border-color:rgba(255,255,255,0.2);color:var(--400)}
 .src-tags{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
@@ -558,7 +559,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .pa-head{font-family:var(--display);font-size:clamp(28px,3.2vw,46px);font-weight:600;line-height:1.05;color:var(--white);text-transform:uppercase;margin-bottom:1.75rem}
 .pa-head em{font-style:italic;color:var(--200);font-weight:400}
 .nots-list{list-style:none;margin:2rem 0;border-top:.5px solid rgba(255,255,255,.07);border-bottom:.5px solid rgba(255,255,255,.07)}
-.nots-list li{display:flex;align-items:center;gap:12px;padding:.9rem 0;border-bottom:.5px solid rgba(255,255,255,.06);font-family:var(--display);font-size:16px;font-weight:600;color:var(--600);text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:1px}
+.nots-list li{display:flex;align-items:center;gap:12px;padding:.9rem 0;border-bottom:.5px solid rgba(255,255,255,.06);font-family:var(--display);font-size:16px;font-weight:600;color:var(--500);text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red-text);text-decoration-thickness:1px}
 .nots-list li:last-child{border-bottom:none}
 .nots-list li .x{font-family:var(--mono);font-size:10px;color:var(--red);text-decoration:none;flex-shrink:0}
 .offer-block{background:var(--800);padding:1.75rem 2.25rem;margin-top:2rem;border-left:1px solid var(--red)}
@@ -572,7 +573,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .pt:hover{background:var(--800)}
 .pt-hd{font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--500);margin-bottom:.9rem}
 .pt-val{font-family:var(--display);font-size:clamp(17px,1.9vw,24px);font-weight:600;color:var(--white);text-transform:uppercase;line-height:1}
-.pt-val.muted{color:var(--700);text-decoration:line-through;text-decoration-color:var(--red)}
+.pt-val.muted{color:var(--500);text-decoration:line-through;text-decoration-color:var(--red-text)}
 .pt-sub{font-size:12px;color:var(--500);margin-top:.6rem;line-height:1.6}
 .traits-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);margin:2rem 0}
 .tg{background:var(--900);padding:1.4rem;transition:background 0.2s,border-left 0.2s;border-left:2px solid transparent}
@@ -743,6 +744,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       <div class="nav-link" id="nl-shippers" onclick="go('shippers')">For Shippers</div>
       <div class="nav-link" id="nl-market" onclick="go('market')">Market Intelligence</div>
     </div>
+    <div class="nav-spacer"></div>
     <div class="nav-cta" id="navCta" onclick="go('access')"><span>Request Private Access</span></div>
     <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
@@ -914,9 +916,9 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       <div class="proven-card"><div class="pv-age">3x</div><div class="pv-label">Cross-Border Operators</div><div class="pv-body">Cross-border operators expanding across Canada, the US, and Mexico.</div></div>
     </div>
     <div class="proven-footer reveal">
-      <div class="pf-item"><div class="pf-val">6+</div><div class="pf-lbl">Years in Operation</div></div>
-      <div class="pf-item"><div class="pf-val">100%</div><div class="pf-lbl">Book Ownership Retained</div></div>
-      <div class="pf-item"><div class="pf-val">Unprecedented</div><div class="pf-lbl">Agent Retention Rate</div></div>
+      <div class="pf-item"><div class="pf-val" id="pf-agents">13</div><div class="pf-lbl">Active Agents</div></div>
+      <div class="pf-item"><div class="pf-val" id="pf-sixfig">6 of 13</div><div class="pf-lbl">Earning Six Figures+</div></div>
+      <div class="pf-item"><div class="pf-val" id="pf-loads">2,250+</div><div class="pf-lbl">Loads Booked <span id="pf-asof" style="font-size:0.6em;color:var(--500)">(2026 YTD)</span></div></div>
     </div>
   </section>
 
@@ -926,9 +928,9 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
         <div class="sec-label">The Standard</div>
         <h2 class="dh">The <em>Standard.</em></h2>
         <ul class="no-list">
-          <li><span class="no-word" style="font-family:var(--display);font-size:26px;font-weight:600;color:var(--700);text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red);min-width:78px">Salary.</span><span class="no-label" style="font-size:12px;color:var(--400)">We don't offer it. We don't believe in it.</span></li>
-          <li><span class="no-word" style="font-family:var(--display);font-size:26px;font-weight:600;color:var(--700);text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red);min-width:78px">Safety Net.</span><span class="no-label" style="font-size:12px;color:var(--400)">Ownership requires exposure. That's the point.</span></li>
-          <li><span class="no-word" style="font-family:var(--display);font-size:26px;font-weight:600;color:var(--700);text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red);min-width:78px">Handcuffs.</span><span class="no-label" style="font-size:12px;color:var(--400)">No non-competes. No restrictions. No fences.</span></li>
+          <li><span class="no-word" style="font-family:var(--display);font-size:26px;font-weight:600;color:var(--500);text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red-text);min-width:78px">Salary.</span><span class="no-label" style="font-size:12px;color:var(--400)">We don't offer it. We don't believe in it.</span></li>
+          <li><span class="no-word" style="font-family:var(--display);font-size:26px;font-weight:600;color:var(--500);text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red-text);min-width:78px">Safety Net.</span><span class="no-label" style="font-size:12px;color:var(--400)">Ownership requires exposure. That's the point.</span></li>
+          <li><span class="no-word" style="font-family:var(--display);font-size:26px;font-weight:600;color:var(--500);text-transform:uppercase;text-decoration:line-through;text-decoration-color:var(--red-text);min-width:78px">Handcuffs.</span><span class="no-label" style="font-size:12px;color:var(--400)">No non-competes. No restrictions. No fences.</span></li>
         </ul>
       </div>
       <div class="reveal-right">
@@ -1255,10 +1257,10 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
         <div class="panel-hdr"><div class="panel-title">Spot Rate Trend — 13 Weeks</div><div class="panel-meta">Blended national average</div></div>
         <div class="chart-area"><svg viewBox="0 0 600 100" preserveAspectRatio="none"><line x1="0" y1="20" x2="600" y2="20" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/><line x1="0" y1="50" x2="600" y2="50" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/><line x1="0" y1="80" x2="600" y2="80" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/><text x="4" y="18" font-family="'DM Mono'" font-size="7" fill="rgba(255,255,255,0.2)">.10</text><text x="4" y="48" font-family="'DM Mono'" font-size="7" fill="rgba(255,255,255,0.2)">.90</text><text x="4" y="78" font-family="'DM Mono'" font-size="7" fill="rgba(255,255,255,0.2)">.70</text><defs><linearGradient id="ag3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9E0D00" stop-opacity="0.18"/><stop offset="100%" stop-color="#9E0D00" stop-opacity="0"/></linearGradient></defs><polygon points="50,82 100,76 150,80 200,68 250,62 300,70 350,58 400,52 450,44 500,36 550,30 600,22 600,100 50,100" fill="url(#ag3)"/><polyline points="50,82 100,76 150,80 200,68 250,62 300,70 350,58 400,52 450,44 500,36 550,30 600,22" fill="none" stroke="#9E0D00" stroke-width="1.5" stroke-linejoin="round"/><circle cx="600" cy="22" r="4" fill="#9E0D00"/><circle cx="600" cy="22" r="8" fill="none" stroke="#9E0D00" stroke-opacity="0.25" stroke-width="1"/></svg></div>
         <div class="chart-axis"><span>Mar 17</span><span>Apr 14</span><span>May 12</span><span>Jun 8</span></div>
-        <div class="chart-legend"><div class="legend-item"><div style="width:8px;height:2px;background:#9E0D00"></div>National Blended Spot Rate</div><div class="legend-item" style="color:var(--600);font-size:7.5px">DAT / FreightWaves SONAR (Illustrative)</div></div>
+        <div class="chart-legend"><div class="legend-item"><div style="width:8px;height:2px;background:#9E0D00"></div>National Blended Spot Rate</div><div class="legend-item" style="color:var(--400);font-size:10px">DAT / FreightWaves SONAR (Illustrative)</div></div>
       </div>
       <div class="chart-side">
-        <div class="sm-metric"><div class="sm-lbl">Fuel Surcharge (FSC)</div><div><span class="sm-val" id="sm-fsc">18.5</span><span class="sm-unit">%</span></div><div class="sm-bar"><div class="sm-bar-fill" id="sm-fsc-bar" style="width:37%;background:var(--amber)"></div></div><div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--600);margin-bottom:5px;text-transform:uppercase"><span>0%</span><span>50%</span></div><div class="sm-note" id="sm-fsc-period">Effective Jun 8–14</div></div>
+        <div class="sm-metric"><div class="sm-lbl">Fuel Surcharge (FSC)</div><div><span class="sm-val" id="sm-fsc">18.5</span><span class="sm-unit">%</span></div><div class="sm-bar"><div class="sm-bar-fill" id="sm-fsc-bar" style="width:37%;background:var(--amber)"></div></div><div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--400);margin-bottom:5px;text-transform:uppercase"><span>0%</span><span>50%</span></div><div class="sm-note" id="sm-fsc-period">Effective Jun 8–14</div></div>
         <div class="sm-metric"><div class="sm-lbl">12-Wk FSC Range</div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><div><span style="font-family:var(--mono);font-size:8.5px;color:var(--500)">Lo</span>&nbsp;<span style="font-family:var(--display);font-size:17px;font-weight:600;color:var(--200)">16.0%</span></div><div><span style="font-family:var(--mono);font-size:8.5px;color:var(--500)">Hi</span>&nbsp;<span style="font-family:var(--display);font-size:17px;font-weight:600;color:var(--200)">21.5%</span></div></div><div class="sm-note">Current at mid-band</div></div>
         <div class="sm-metric" style="border:none;padding-bottom:0;margin-bottom:0"><div class="sm-lbl">Diesel Trend</div><div style="height:32px;margin-top:4px"><svg viewBox="0 0 140 32" preserveAspectRatio="none" style="width:100%;height:100%"><polyline points="0,24 20,22 40,26 60,20 80,22 100,18 120,19 140,18" fill="none" stroke="var(--500)" stroke-width="1.5"/><circle cx="140" cy="18" r="3" fill="var(--400)"/></svg></div><div class="sm-note" id="sm-diesel-note" style="margin-top:4px">.84/gal → Stable</div></div>
       </div>
@@ -1270,7 +1272,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       <div class="rate-cell"><div class="mode-badge">Intermodal</div><div><span class="rate-val">.14</span><span class="rate-unit">/mi</span></div><div class="rate-chg fl">→ Flat <span style="color:var(--500)">wk/wk</span></div><div class="rate-spark"><svg viewBox="0 0 120 26" preserveAspectRatio="none"><polyline points="0,14 20,15 40,13 60,14 80,13 100,14 120,14" fill="none" stroke="var(--500)" stroke-width="1"/><circle cx="120" cy="14" r="2.5" fill="var(--400)"/></svg></div></div>
     </div>
     <div class="bottom-row">
-      <div class="reg-panel"><div class="panel-title">Regional Rate Direction</div><div class="reg-grid"><div class="reg-cell"><div class="reg-name">Midwest</div><div style="font-size:16px;font-family:var(--mono)" class="up">↑</div></div><div class="reg-cell"><div class="reg-name">Southeast</div><div style="font-size:16px;font-family:var(--mono)" class="up">↑</div></div><div class="reg-cell"><div class="reg-name">Northeast</div><div style="font-size:16px;font-family:var(--mono)" class="fl">→</div></div><div class="reg-cell"><div class="reg-name">Southwest</div><div style="font-size:16px;font-family:var(--mono)" class="up">↑</div></div><div class="reg-cell"><div class="reg-name">Northwest</div><div style="font-size:16px;font-family:var(--mono)" class="dn">↓</div></div><div class="reg-cell"><div class="reg-name">Mountain</div><div style="font-size:16px;font-family:var(--mono)" class="up">↑</div></div></div><div style="margin-top:10px;font-family:var(--mono);font-size:7.5px;color:var(--600);text-transform:uppercase;letter-spacing:.08em">↑ Rising &nbsp;→ Flat &nbsp;↓ Declining</div></div>
+      <div class="reg-panel"><div class="panel-title">Regional Rate Direction</div><div class="reg-grid"><div class="reg-cell"><div class="reg-name">Midwest</div><div style="font-size:16px;font-family:var(--mono)" class="up">↑</div></div><div class="reg-cell"><div class="reg-name">Southeast</div><div style="font-size:16px;font-family:var(--mono)" class="up">↑</div></div><div class="reg-cell"><div class="reg-name">Northeast</div><div style="font-size:16px;font-family:var(--mono)" class="fl">→</div></div><div class="reg-cell"><div class="reg-name">Southwest</div><div style="font-size:16px;font-family:var(--mono)" class="up">↑</div></div><div class="reg-cell"><div class="reg-name">Northwest</div><div style="font-size:16px;font-family:var(--mono)" class="dn">↓</div></div><div class="reg-cell"><div class="reg-name">Mountain</div><div style="font-size:16px;font-family:var(--mono)" class="up">↑</div></div></div><div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--400);text-transform:uppercase;letter-spacing:.06em">↑ Rising &nbsp;→ Flat &nbsp;↓ Declining</div></div>
       <div class="mkt-panel"><div class="panel-title">Market Conditions</div><div class="mkt-grid"><div class="ms"><div class="ms-lbl">Volatility</div><div class="ms-val" style="font-size:16px;color:var(--amber)">Moderate</div><div class="vol-bar"><div class="vol-fill"></div><div class="vol-ptr" style="left:58%"></div></div><div class="vol-lbls"><span>Calm</span><span>Volatile</span></div></div><div class="ms"><div class="ms-lbl">Load-to-Truck</div><div class="ms-val">4.2<span style="font-family:var(--mono);font-size:9px;color:var(--500)">:1</span></div><div class="ms-sub up">↑ Bullish</div></div><div class="ms"><div class="ms-lbl">Tender Rejection</div><div class="ms-val">8.4<span style="font-family:var(--mono);font-size:9px;color:var(--500)">%</span></div><div class="ms-sub up">↑ Carriers gaining</div></div><div class="ms"><div class="ms-lbl">Condition</div><div class="ms-val" style="font-size:16px;color:#4db874">Favorable</div><div class="ms-sub">Broker-side ops</div></div><div class="ms"><div class="ms-lbl">Outbound Tender</div><div class="ms-val">+2.1<span style="font-family:var(--mono);font-size:9px;color:var(--500)">%</span></div><div class="ms-sub up">↑ vs 4-wk avg</div></div><div class="ms"><div class="ms-lbl">Spot vs Contract</div><div class="ms-val">−/bin/sh.18<span style="font-family:var(--mono);font-size:9px;color:var(--500)">/mi</span></div><div class="ms-sub dn">↓ Gap narrowing</div></div></div></div>
     </div>
     <div class="db-foot"><span class="db-foot-txt">RCG Market Terminal v3.0 — Confidential</span><div class="src-tags"><span class="src-tag">DAT</span><span class="src-tag">SONAR</span><span class="src-tag">EIA</span><span class="src-tag">Speedy.ca</span><span class="db-foot-txt" id="db-data-status">EIA · FRED · Updated <span id="db-updated">—</span></span></div></div>
@@ -1405,6 +1407,23 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 
   <div style="background:var(--900);padding:5rem 2.5rem 0">
     <div class="read-col" style="padding:0 1.5rem">
+      <div class="reveal" style="margin-bottom:3.5rem">
+        <div class="sec-label" style="justify-content:center">By The Numbers</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06)">
+          <div style="background:var(--800);padding:1.75rem 1.25rem;text-align:center">
+            <div style="font-family:var(--display);font-size:34px;font-weight:600;color:var(--white)" id="pa-sixfig">6 of 13</div>
+            <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--500);margin-top:.5rem">Agents Earning Six Figures+</div>
+          </div>
+          <div style="background:var(--800);padding:1.75rem 1.25rem;text-align:center">
+            <div style="font-family:var(--display);font-size:34px;font-weight:600;color:var(--white)" id="pa-loads">2,250+</div>
+            <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--500);margin-top:.5rem">Loads Booked <span id="pa-asof">(2026 YTD)</span></div>
+          </div>
+          <div style="background:var(--800);padding:1.75rem 1.25rem;text-align:center">
+            <div style="font-family:var(--display);font-size:34px;font-weight:600;color:var(--white)" id="pa-revenue">~$8M</div>
+            <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--500);margin-top:.5rem">Projected 2026 Revenue</div>
+          </div>
+        </div>
+      </div>
       <div class="form-hdr reveal">
         <div class="form-eyebrow">Request Private Access</div>
         <h2 class="dh" style="font-size:clamp(24px,3.2vw,42px);text-align:center;margin-bottom:1rem">Request A Private &amp;<br><em>Confidential Conversation.</em></h2>
@@ -1722,6 +1741,37 @@ window.addEventListener('DOMContentLoaded', () => {
       if (name === 'FSC')    valEl.textContent = fsc !== null ? fsc.toFixed(1) + '%' : '—';
       if (name === 'Diesel') valEl.textContent = '$' + diesel.toFixed(2) + '/gal';
     });
+
+    // ── Business stats (updated monthly via the private stats tool) ────────
+    if (data.business_stats) {
+      var bs = data.business_stats;
+      if (bs.active_agents != null) {
+        setText('pf-agents', bs.active_agents);
+      }
+      if (bs.agents_six_figure != null && bs.active_agents != null) {
+        var sixFigStr = bs.agents_six_figure + ' of ' + bs.active_agents;
+        setText('pf-sixfig', sixFigStr);
+        setText('pa-sixfig', sixFigStr);
+      }
+      if (bs.loads_booked_ytd != null) {
+        var loadsStr = Number(bs.loads_booked_ytd).toLocaleString() + '+';
+        setText('pf-loads', loadsStr);
+        setText('pa-loads', loadsStr);
+      }
+      if (bs.loads_booked_as_of) {
+        try {
+          var asOfDate = new Date(bs.loads_booked_as_of + 'T12:00:00Z');
+          var yr = asOfDate.getFullYear();
+          setText('pf-asof', '(' + yr + ' YTD)');
+          setText('pa-asof', '(' + yr + ' YTD)');
+        } catch(e) {}
+      }
+      if (bs.revenue_projected_2026 != null) {
+        var rev = Number(bs.revenue_projected_2026);
+        var revStr = rev >= 1000000 ? '~$' + (rev / 1000000).toFixed(1).replace('.0','') + 'M' : '~$' + Math.round(rev/1000) + 'K';
+        setText('pa-revenue', revStr);
+      }
+    }
   }
 
   // ── Fetch market.json ──────────────────────────────────────────────────────
