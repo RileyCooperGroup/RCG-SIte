@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>RileyCooper Group — Freight Business Accelerator</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -1439,21 +1445,21 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       </div>
       <div class="form-wrap reveal" id="formWrap">
         <div class="fg-lbl">Personal Information</div>
-        <div class="field-row"><div class="field"><label>Full Name</label><input type="text" placeholder="First and last name"></div><div class="field"><label>Phone Number</label><input type="tel" placeholder="+1 (555) 000-0000"></div></div>
-        <div class="field"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
-        <div class="field"><label>Current Occupation</label><input type="text" placeholder="Current role or company"></div>
+        <div class="field-row"><div class="field"><label>Full Name</label><input type="text" name="full_name" placeholder="First and last name" required></div><div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="+1 (555) 000-0000" required></div></div>
+        <div class="field"><label>Email Address</label><input type="email" name="email" placeholder="you@example.com" required></div>
+        <div class="field"><label>Current Occupation</label><input type="text" name="occupation" placeholder="Current role or company"></div>
         <div class="f-spacer"></div>
         <div class="fg-lbl">Experience &amp; Background</div>
-        <div class="field-row"><div class="field"><label>Years of Sales Experience</label><select><option value="">Select...</option><option>Less than 1 year</option><option>1 – 3 years</option><option>3 – 5 years</option><option>5 – 10 years</option><option>10+ years</option></select></div><div class="field"><label>Years of Freight Experience</label><select><option value="">Select...</option><option>None — transitioning into freight</option><option>Less than 1 year</option><option>1 – 3 years</option><option>3 – 5 years</option><option>5+ years</option></select></div></div>
-        <div class="field"><label>Existing Book of Business (Optional)</label><select><option value="">Select...</option><option>No existing book</option><option>Under $500K annual revenue</option><option>$500K – $1M annual revenue</option><option>$1M – $5M annual revenue</option><option>$5M+ annual revenue</option></select></div>
-        <div class="field"><label>Primary Geographic Market</label><input type="text" placeholder="City, region, or country"></div>
+        <div class="field-row"><div class="field"><label>Years of Sales Experience</label><select name="sales_experience"><option value="">Select...</option><option>Less than 1 year</option><option>1 – 3 years</option><option>3 – 5 years</option><option>5 – 10 years</option><option>10+ years</option></select></div><div class="field"><label>Years of Freight Experience</label><select name="freight_experience"><option value="">Select...</option><option>None — transitioning into freight</option><option>Less than 1 year</option><option>1 – 3 years</option><option>3 – 5 years</option><option>5+ years</option></select></div></div>
+        <div class="field"><label>Existing Book of Business (Optional)</label><select name="existing_book"><option value="">Select...</option><option>No existing book</option><option>Under $500K annual revenue</option><option>$500K – $1M annual revenue</option><option>$1M – $5M annual revenue</option><option>$5M+ annual revenue</option></select></div>
+        <div class="field"><label>Primary Geographic Market</label><input type="text" name="geographic_market" placeholder="City, region, or country"></div>
         <div class="f-spacer"></div>
         <div class="fg-lbl">Goals &amp; Fit</div>
-        <div class="field"><label>Why RCG?</label><textarea rows="4" placeholder="Tell us what brought you here and what you're looking to build..."></textarea></div>
-        <div class="field"><label>Income Goals Over The Next 3 Years</label><select><option value="">Select range...</option><option>$75K – $150K</option><option>$150K – $300K</option><option>$300K – $500K</option><option>$500K – $1M</option><option>$1M+</option></select></div>
+        <div class="field"><label>Why RCG?</label><textarea name="why_rcg" rows="4" placeholder="Tell us what brought you here and what you're looking to build..."></textarea></div>
+        <div class="field"><label>Income Goals Over The Next 3 Years</label><select name="income_goals"><option value="">Select range...</option><option>$75K – $150K</option><option>$150K – $300K</option><option>$300K – $500K</option><option>$500K – $1M</option><option>$1M+</option></select></div>
         <div class="f-spacer"></div>
         <div class="confirm-row" onclick="toggleChk()"><div class="chk-box" id="chkBox"><span class="chk-mark">✓</span></div><div class="chk-txt"><strong>Yes, I am comfortable operating in a performance-based environment without a salary.</strong><br>I understand that RCG does not offer guaranteed income and that results are determined by my own effort and execution.</div></div>
-        <button class="form-submit" onclick="handleSubmit()">Submit For Review</button>
+        <button class="form-submit" id="formSubmitBtn" onclick="handleSubmit()">Submit For Review</button>
         <div class="form-note">Applications reviewed within 48 business hours.<br>RCG reserves the right to decline any application without explanation.<br>All submissions held in strict confidence.</div>
       </div>
       <div class="success-state" id="successState"><div class="ss-icon"><span class="ss-icon-txt">rc</span></div><div class="ss-head">Application <em>Received.</em></div><p class="ss-body">Your inquiry has been submitted for review. If you are a fit, a member of the RCG founding team will be in touch within 48 business hours.</p><div class="ss-note">All submissions held in strict confidence.</div></div>
@@ -1560,11 +1566,47 @@ function handleSubmit() {
     setTimeout(() => { b.style.borderColor = ''; b.style.animation = ''; }, 1200);
     return;
   }
-  document.getElementById('formWrap').style.display = 'none';
-  const s = document.getElementById('successState');
-  s.style.display = 'block';
-  s.style.animation = 'heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both';
-  s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const wrap = document.getElementById('formWrap');
+  const btn = document.getElementById('formSubmitBtn');
+  const fullName = wrap.querySelector('[name="full_name"]').value.trim();
+  const email = wrap.querySelector('[name="email"]').value.trim();
+  const phone = wrap.querySelector('[name="phone"]').value.trim();
+
+  // Basic required-field check (mirrors the `required` attributes on the inputs)
+  if (!fullName || !email || !phone) {
+    if (!fullName) wrap.querySelector('[name="full_name"]').style.borderColor = 'rgba(158,13,0,0.9)';
+    if (!email) wrap.querySelector('[name="email"]').style.borderColor = 'rgba(158,13,0,0.9)';
+    if (!phone) wrap.querySelector('[name="phone"]').style.borderColor = 'rgba(158,13,0,0.9)';
+    return;
+  }
+
+  // Collect every named field in the form into a payload
+  const fields = wrap.querySelectorAll('[name]');
+  const payload = { _subject: 'New Private Access Request — ' + fullName };
+  fields.forEach(f => { payload[f.name] = f.value; });
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  fetch('https://formspree.io/f/mlgygoja', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('Submission failed');
+      wrap.style.display = 'none';
+      const s = document.getElementById('successState');
+      s.style.display = 'block';
+      s.style.animation = 'heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both';
+      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'Submit For Review';
+      alert('Something went wrong sending your application. Please try again, or email us directly at rostofe@rcgrp.co.');
+    });
 }
 
 // ══ TABS (Market page) ══
