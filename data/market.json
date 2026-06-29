@@ -9,11 +9,21 @@
   "fsc_pct": 40.7,
   "fsc_pct_prev": 43.2,
   "fsc_delta": -2.5,
-  "fsc_period": "Jun 22 \u2013 Jun 28",
+  "fsc_period": "Jun 22 – Jun 28",
   "crude_wti": 78.94,
   "crude_wti_date": "2026-06-22",
   "freight_index": 138.7,
   "freight_index_date": "2026-03-01",
   "freight_index_prev": 138.1,
-  "freight_index_delta": 0.6
+  "freight_index_delta": 0.6,
+  "business_stats": {
+    "active_agents": 13,
+    "agents_full_time": 6,
+    "agents_six_figure": 5,
+    "agents_new": 7,
+    "loads_booked_ytd": 2756,
+    "loads_booked_as_of": "2026-06-29",
+    "revenue_projected_2026": 8000000,
+    "updated_at": "2026-06-29T18:55:17.993Z"
+  }
 }
