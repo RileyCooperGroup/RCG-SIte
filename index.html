@@ -1346,11 +1346,21 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
   <hr class="div">
   <div style="max-width:1360px;margin:0 auto;padding:0 2.5rem 3rem">
     <div style="height:.5px;background:rgba(255,255,255,.07);margin-bottom:3rem"></div>
-    <div style="background:var(--black);border:.5px solid rgba(255,255,255,.07);padding:3rem 2.5rem;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:border-color 0.3s" class="reveal" onmouseenter="this.style.borderColor='rgba(158,13,0,0.35)'" onmouseleave="this.style.borderColor='rgba(255,255,255,0.07)'">
+    <div style="background:var(--black);border:.5px solid rgba(255,255,255,.07);padding:3rem 2.5rem;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:border-color 0.3s" class="reveal" onmouseenter="this.style.borderColor='rgba(158,13,0,0.35)'" onmouseleave="this.style.borderColor='rgba(255,255,255,0.07)'" onclick="openVideoModal()">
       <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(158,13,0,0.04) 0%,transparent 70%)"></div>
       <div style="width:46px;height:46px;border-radius:50%;background:rgba(158,13,0,.15);border:.5px solid rgba(158,13,0,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;position:relative;transition:transform 0.3s var(--ease-out),background 0.3s" id="vphIcon"><div style="font-size:16px;color:var(--red);margin-left:3px">▶</div></div>
       <div style="font-family:var(--display);font-size:17px;font-weight:600;color:var(--white);text-transform:uppercase;margin-bottom:.4rem;position:relative">Watch: A Message From The Founder</div>
-      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);position:relative">Video — Coming Soon · Approx. 4 min</div>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);position:relative">Approx. 2:27</div>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" style="display:none;position:fixed;inset:0;background:rgba(8,8,8,0.92);z-index:1000;align-items:center;justify-content:center;padding:2rem" onclick="if(event.target===this)closeVideoModal()">
+    <div style="width:100%;max-width:900px;position:relative">
+      <button onclick="closeVideoModal()" style="position:absolute;top:-44px;right:0;background:none;border:.5px solid rgba(255,255,255,.2);color:var(--white);width:36px;height:36px;cursor:pointer;font-size:18px;line-height:1;transition:border-color 0.2s" onmouseenter="this.style.borderColor='var(--red)'" onmouseleave="this.style.borderColor='rgba(255,255,255,.2)'">✕</button>
+      <div style="position:relative;padding-bottom:56.25%;height:0;background:#000;border:.5px solid rgba(255,255,255,.1)">
+        <iframe id="videoFrame" style="position:absolute;top:0;left:0;width:100%;height:100%" src="" title="A Message From The Founder" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
 
@@ -1558,6 +1568,27 @@ function closeMenu() {
 function toggleChk() {
   document.getElementById('chkBox').classList.toggle('chkd');
 }
+// ══ VIDEO MODAL ══
+function openVideoModal() {
+  const modal = document.getElementById('videoModal');
+  const frame = document.getElementById('videoFrame');
+  frame.src = 'https://www.youtube.com/embed/R7nxO0nqnZs?autoplay=1&rel=0';
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById('videoModal');
+  const frame = document.getElementById('videoFrame');
+  modal.style.display = 'none';
+  frame.src = ''; // stops playback by removing the embed
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVideoModal();
+});
+
 function handleSubmit() {
   const b = document.getElementById('chkBox');
   if (!b.classList.contains('chkd')) {
