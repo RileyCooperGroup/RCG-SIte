@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-06-30T17:29:36Z",
+  "fetched_at": "2026-07-01T17:33:00Z",
   "date": "2026-06-29",
   "date_prev": "2026-06-22",
   "diesel_price": 4.668,
@@ -10,10 +10,12 @@
   "fsc_pct_prev": 40.7,
   "fsc_delta": -1.9,
   "fsc_period": "Jun 29 \u2013 Jul 5",
-  "crude_wti": 78.94,
-  "crude_wti_date": "2026-06-22",
-  "freight_index": 138.7,
-  "freight_index_date": "2026-03-01",
-  "freight_index_prev": 138.1,
-  "freight_index_delta": 0.6
+  "crude_wti": 71.87,
+  "crude_wti_date": "2026-06-29",
+  "crude_wti_prev": 70.3,
+  "crude_wti_delta": 1.57,
+  "freight_index": 139.6,
+  "freight_index_date": "2026-04-01",
+  "freight_index_prev": 139.2,
+  "freight_index_delta": 0.4
 }
