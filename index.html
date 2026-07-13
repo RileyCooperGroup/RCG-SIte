@@ -1241,7 +1241,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
   <div style="background:var(--black);padding:8rem 2.5rem;position:relative;overflow:hidden">
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 100%,rgba(158,13,0,.06) 0%,transparent 70%)"></div>
     <div style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;position:relative" class="two-col">
-      <div class="reveal-left"><div class="eyebrow">Confidence Through Structure</div><h2 class="dh" style="margin-bottom:1.5rem">Confidence<br>Through <em>Structure.</em></h2><div class="actions" style="margin-top:2.75rem"><button class="btn-r" onclick="go('access')">Speak With Our Team</button><button class="btn-o" onclick="go('market')">View Market Intelligence</button></div></div>
+      <div class="reveal-left"><div class="eyebrow">Confidence Through Structure</div><h2 class="dh" style="margin-bottom:1.5rem">Confidence<br>Through <em>Structure.</em></h2><div class="actions" style="margin-top:2.75rem"><button class="btn-r" onclick="openShipperModal()">Speak With Our Team</button><button class="btn-o" onclick="go('market')">View Market Intelligence</button></div></div>
       <div class="reveal-right"><ul style="list-style:none"><li style="padding:1.4rem 0;border-bottom:.5px solid rgba(255,255,255,.07);transition:padding-left 0.2s" onmouseenter="this.style.paddingLeft='8px'" onmouseleave="this.style.paddingLeft='0'"><div style="font-family:var(--display);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--white);text-transform:uppercase;line-height:1.1;margin-bottom:.5rem">Relationships</div><div style="font-size:13px;color:var(--400);line-height:1.7;max-width:480px">Every engagement begins and ends with a person who is accountable.</div></li><li style="padding:1.4rem 0;border-bottom:.5px solid rgba(255,255,255,.07);transition:padding-left 0.2s" onmouseenter="this.style.paddingLeft='8px'" onmouseleave="this.style.paddingLeft='0'"><div style="font-family:var(--display);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--white);text-transform:uppercase;line-height:1.1;margin-bottom:.5rem">Visibility</div><div style="font-size:13px;color:var(--400);line-height:1.7;max-width:480px">Real-time access to shipment status and market conditions for confident decisions.</div></li><li style="padding:1.4rem 0;transition:padding-left 0.2s" onmouseenter="this.style.paddingLeft='8px'" onmouseleave="this.style.paddingLeft='0'"><div style="font-family:var(--display);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--white);text-transform:uppercase;line-height:1.1;margin-bottom:.5rem">Accountability</div><div style="font-size:13px;color:var(--400);line-height:1.7;max-width:480px">Standards and systems that treat your freight as a reflection of our reputation.</div></li></ul></div>
     </div>
   </div>
@@ -1568,6 +1568,86 @@ function closeMenu() {
 function toggleChk() {
   document.getElementById('chkBox').classList.toggle('chkd');
 }
+// ══ SHIPPER MODAL ══
+function openShipperModal() {
+  const modal = document.getElementById('shipperModal');
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  modal.scrollTop = 0;
+}
+
+function closeShipperModal() {
+  document.getElementById('shipperModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function handlePortalChange(val) {
+  const note = document.getElementById('sf-portal-note');
+  note.style.display = val === 'blended' ? 'block' : 'none';
+}
+
+async function submitShipperForm() {
+  const name    = document.getElementById('sf-name').value.trim();
+  const company = document.getElementById('sf-company').value.trim();
+  const email   = document.getElementById('sf-email').value.trim();
+  const phone   = document.getElementById('sf-phone').value.trim();
+
+  if (!name || !email || !phone) {
+    if (!name)  document.getElementById('sf-name').style.borderColor  = 'rgba(158,13,0,0.9)';
+    if (!email) document.getElementById('sf-email').style.borderColor = 'rgba(158,13,0,0.9)';
+    if (!phone) document.getElementById('sf-phone').style.borderColor = 'rgba(158,13,0,0.9)';
+    return;
+  }
+
+  // Collect equipment checkboxes
+  const checked = [...document.querySelectorAll('#sf-equipment input[type="checkbox"]:checked')]
+    .map(cb => cb.value).join(', ') || 'None selected';
+
+  const payload = {
+    _subject: 'New Shipper Inquiry — ' + (company || name),
+    inquiry_type: 'Shipper',
+    full_name:          name,
+    company:            company,
+    email:              email,
+    phone:              phone,
+    role:               document.getElementById('sf-role').value,
+    shipment_type:      document.getElementById('sf-mode').value,
+    monthly_volume:     document.getElementById('sf-volume').value,
+    equipment_required: checked,
+    haz_required:       document.getElementById('sf-haz').value,
+    tailgate_required:  document.getElementById('sf-tailgate').value,
+    shipping_lanes:     document.getElementById('sf-lanes').value,
+    gps_tracking:       document.getElementById('sf-gps').value,
+    visibility_level:   document.getElementById('sf-visibility').value,
+    portal_access:      document.getElementById('sf-portal').value,
+    num_locations:      document.getElementById('sf-locations').value,
+    biggest_challenge:  document.getElementById('sf-challenge').value,
+  };
+
+  const btn = document.getElementById('shipperSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    const res = await fetch('https://formspree.io/f/mlgygoja', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('Failed');
+    document.getElementById('shipperFormWrap').style.display = 'none';
+    document.getElementById('shipperSuccess').style.display = 'block';
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = 'Send Inquiry';
+    alert('Something went wrong. Please try again or email us directly at rostofe@rcgrp.co.');
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeShipperModal(); closeVideoModal(); }
+});
+
 // ══ VIDEO MODAL ══
 function openVideoModal() {
   const modal = document.getElementById('videoModal');
@@ -1884,6 +1964,163 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 })();
 </script>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     RCG SHIPPER INQUIRY MODAL
+     Triggered by "Speak With Our Team" buttons on the Shippers page.
+     Submits to Formspree mlgygoja → rostofe@rcgrp.co
+════════════════════════════════════════════════════════════════════════ -->
+<div id="shipperModal" style="display:none;position:fixed;inset:0;background:rgba(8,8,8,0.94);z-index:2000;overflow-y:auto;padding:2rem 1rem" onclick="if(event.target===this)closeShipperModal()">
+  <div style="max-width:680px;margin:0 auto;background:var(--800);border:.5px solid rgba(255,255,255,.09);padding:3rem 2.5rem;position:relative">
+
+    <!-- Close -->
+    <button onclick="closeShipperModal()" style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:.5px solid rgba(255,255,255,.18);color:var(--400);width:32px;height:32px;cursor:pointer;font-size:16px;line-height:1;transition:border-color 0.2s,color 0.2s" onmouseenter="this.style.borderColor='var(--red);this.style.color='var(--white)'" onmouseleave="this.style.borderColor='rgba(255,255,255,.18)';this.style.color='var(--400)'">✕</button>
+
+    <!-- Header -->
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.75rem">Start The Conversation</div>
+    <div style="font-family:var(--display);font-size:clamp(22px,3vw,32px);font-weight:600;color:var(--white);text-transform:uppercase;line-height:1.1;margin-bottom:.6rem">Let's Build Something <em>That Works.</em></div>
+    <p style="font-size:13px;color:var(--400);line-height:1.7;margin-bottom:2.5rem;border-bottom:.5px solid rgba(255,255,255,.07);padding-bottom:2rem">A few questions so our first conversation is worth your time. We'll come prepared with a clear picture of how we can support your operation — and if there's a fit, we'll show you exactly what that looks like.</p>
+
+    <!-- Form -->
+    <div id="shipperFormWrap">
+
+      <!-- Contact -->
+      <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--500);margin-bottom:1rem">Who We're Talking To</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+        <div class="field"><label>Your Name</label><input type="text" id="sf-name" name="full_name" placeholder="First and last name"></div>
+        <div class="field"><label>Company</label><input type="text" id="sf-company" name="company" placeholder="Who do you ship for?"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+        <div class="field"><label>Best Email</label><input type="email" id="sf-email" name="email" placeholder="Where should we reach you?"></div>
+        <div class="field"><label>Direct Line</label><input type="tel" id="sf-phone" name="phone" placeholder="Best number to reach you"></div>
+      </div>
+      <div class="field" style="margin-bottom:2rem"><label>Your Role</label><input type="text" id="sf-role" name="role" placeholder="How do you fit into the freight decision?"></div>
+
+      <!-- Freight Profile -->
+      <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--500);margin-bottom:1rem;padding-top:1.5rem;border-top:.5px solid rgba(255,255,255,.07)">Tell Us About Your Freight</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+        <div class="field"><label>How Are You Moving Freight?</label>
+          <select id="sf-mode" name="shipment_type">
+            <option value="">Select...</option>
+            <option>Full truckload (TL)</option>
+            <option>Less-than-truckload (LTL)</option>
+            <option>Both — it depends on the shipment</option>
+            <option>Still working that out</option>
+          </select>
+        </div>
+        <div class="field"><label>How Much Are You Moving?</label>
+          <select id="sf-volume" name="monthly_volume">
+            <option value="">Select...</option>
+            <option>Just getting started — under 10 loads/month</option>
+            <option>Growing — 10 to 25 loads/month</option>
+            <option>Established — 25 to 50 loads/month</option>
+            <option>High volume — 50 to 100 loads/month</option>
+            <option>Enterprise — 100+ loads/month</option>
+            <option>Variable — hard to predict</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Equipment -->
+      <div class="field" style="margin-bottom:1rem">
+        <label>What Equipment Do You Need? <span style="color:var(--500);font-weight:400">(select all that apply)</span></label>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.5rem" id="sf-equipment">
+          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Dry Van" style="accent-color:var(--red)"> Dry Van</label>
+          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Reefer" style="accent-color:var(--red)"> Reefer</label>
+          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Flatbed" style="accent-color:var(--red)"> Flatbed</label>
+          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Step Deck" style="accent-color:var(--red)"> Step Deck</label>
+          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Power Only" style="accent-color:var(--red)"> Power Only</label>
+          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Not Sure"> Not Sure</label>
+        </div>
+      </div>
+
+      <!-- Special Requirements -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+        <div class="field"><label>Do You Ship Dangerous Goods?</label>
+          <select id="sf-haz" name="haz_required">
+            <option value="">Select...</option>
+            <option>Yes — it's a core part of our freight</option>
+            <option>Occasionally — a few shipments a month</option>
+            <option>No</option>
+            <option>Not certain — let's discuss</option>
+          </select>
+        </div>
+        <div class="field"><label>Do You Need Tailgate / Liftgate Service?</label>
+          <select id="sf-tailgate" name="tailgate_required">
+            <option value="">Select...</option>
+            <option>Yes — regularly needed</option>
+            <option>Sometimes</option>
+            <option>No — standard delivery works</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem">
+        <div class="field"><label>Where Are You Shipping?</label><input type="text" id="sf-lanes" name="shipping_lanes" placeholder="Origins, destinations, cross-border needs"></div>
+        <div class="field"><label>How Important Is Real-Time Tracking?</label>
+          <select id="sf-gps" name="gps_tracking">
+            <option value="">Select...</option>
+            <option>Critical — I need to know where every load is</option>
+            <option>Important, but not a dealbreaker</option>
+            <option>Not a priority for us</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Visibility & Portal -->
+      <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--500);margin-bottom:1rem;padding-top:1.5rem;border-top:.5px solid rgba(255,255,255,.07)">Visibility & Control</div>
+      <div class="field" style="margin-bottom:1rem">
+        <label>How Do You Want To Stay Informed?</label>
+        <select id="sf-visibility" name="visibility_level">
+          <option value="">Select...</option>
+          <option>Full visibility — I want to see everything, in real time</option>
+          <option>Keep me updated at the key moments — pickup, in-transit, delivered</option>
+          <option>Only reach out if something needs my attention</option>
+          <option>I'm open to recommendations — show me what works</option>
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:.75rem">
+        <label>Would Your Team Benefit From Their Own Back Office?</label>
+        <select id="sf-portal" name="portal_access" onchange="handlePortalChange(this.value)">
+          <option value="">Select...</option>
+          <option value="head_office">Yes — one central view across all our locations</option>
+          <option value="branch">Yes — each location should manage their own</option>
+          <option value="blended">Yes — headquarters oversight with branch-level access too</option>
+          <option value="none">Not right now — keep it simple</option>
+          <option value="unsure">Not sure — I'd love to see what's possible</option>
+        </select>
+      </div>
+      <div id="sf-portal-note" style="display:none;background:rgba(158,13,0,0.06);border:.5px solid rgba(158,13,0,0.2);padding:1rem 1.25rem;margin-bottom:1rem">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem">This is how the best-run operations do it.</div>
+        <p style="font-size:12px;color:var(--400);line-height:1.7">Your head office sees the full picture across every location. Each branch sees only what they own. No confusion, no oversharing, no back-and-forth. Enterprise clients like ABC and QXO have built their back office around this model. We'll show you exactly how it works on our call.</p>
+      </div>
+      <div class="field" style="margin-bottom:2rem">
+        <label>How Many Locations Are We Supporting?</label>
+        <input type="text" id="sf-locations" name="num_locations" placeholder="Warehouses, branches, or distribution centres">
+      </div>
+
+      <!-- Anything else -->
+      <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--500);margin-bottom:1rem;padding-top:1.5rem;border-top:.5px solid rgba(255,255,255,.07)">One Last Thing</div>
+      <div class="field" style="margin-bottom:2rem">
+        <label>What's Not Working Right Now?</label>
+        <textarea id="sf-challenge" name="biggest_challenge" rows="3" placeholder="Visibility gaps, carrier reliability, cost, cross-border friction, service inconsistency — whatever's costing you the most..."></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button id="shipperSubmitBtn" onclick="submitShipperForm()" style="width:100%;background:var(--red);color:#fff;border:none;padding:1rem;font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 0.18s" onmouseenter="this.style.background='var(--red2)'" onmouseleave="this.style.background='var(--red)'">Let's Talk</button>
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:1rem;text-align:center;line-height:1.8">We'll be in touch within one business day · Everything shared here stays between us</div>
+    </div>
+
+    <!-- Success state -->
+    <div id="shipperSuccess" style="display:none;text-align:center;padding:3rem 0">
+      <div style="font-family:var(--display);font-size:28px;font-weight:600;color:var(--white);text-transform:uppercase;margin-bottom:.75rem">We'll Be In Touch.</div>
+      <div style="font-family:var(--display);font-size:18px;font-weight:400;font-style:italic;color:var(--300);margin-bottom:1.5rem">Your inquiry is in good hands.</div>
+      <p style="font-size:13px;color:var(--400);line-height:1.7;max-width:440px;margin:0 auto">Someone from our team will reach out within one business day — prepared, informed, and ready to have a real conversation about your freight operation.</p>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>
