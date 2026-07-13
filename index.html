@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1568,6 +1569,25 @@ function closeMenu() {
 function toggleChk() {
   document.getElementById('chkBox').classList.toggle('chkd');
 }
+function toggleEquipment(el) {
+  const isActive = el.dataset.active === 'true';
+  if (isActive) {
+    el.dataset.active = 'false';
+    el.style.background = 'var(--900)';
+    el.style.borderColor = 'rgba(255,255,255,.12)';
+    el.style.color = 'var(--400)';
+  } else {
+    el.dataset.active = 'true';
+    el.style.background = 'var(--red)';
+    el.style.borderColor = 'var(--red)';
+    el.style.color = '#fff';
+  }
+  // Update hidden input with all selected values
+  const selected = [...document.querySelectorAll('.eq-btn[data-active="true"]')]
+    .map(b => b.dataset.value);
+  document.getElementById('sf-equipment-val').value = selected.join(', ') || '';
+}
+
 // ══ INTENT MODAL ══
 function openIntentModal() {
   const modal = document.getElementById('intentModal');
@@ -1611,9 +1631,8 @@ async function submitShipperForm() {
     return;
   }
 
-  // Collect equipment checkboxes
-  const checked = [...document.querySelectorAll('#sf-equipment input[type="checkbox"]:checked')]
-    .map(cb => cb.value).join(', ') || 'None selected';
+  // Collect equipment selections from toggle buttons
+  const checked = document.getElementById('sf-equipment-val').value || 'None selected';
 
   const payload = {
     _subject: 'New Shipper Inquiry — ' + (company || name),
@@ -2036,15 +2055,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
       <!-- Equipment -->
       <div class="field" style="margin-bottom:1rem">
-        <label>What Equipment Do You Need? <span style="color:var(--500);font-weight:400">(select all that apply)</span></label>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.5rem" id="sf-equipment">
-          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Dry Van" style="accent-color:var(--red)"> Dry Van</label>
-          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Reefer" style="accent-color:var(--red)"> Reefer</label>
-          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Flatbed" style="accent-color:var(--red)"> Flatbed</label>
-          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Step Deck" style="accent-color:var(--red)"> Step Deck</label>
-          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Power Only" style="accent-color:var(--red)"> Power Only</label>
-          <label style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:10px;color:var(--400);cursor:pointer;text-transform:uppercase;letter-spacing:.06em"><input type="checkbox" value="Not Sure"> Not Sure</label>
+        <label>What Equipment Do You Need? <span style="color:var(--500);font-weight:400">Select all that apply</span></label>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.75rem" id="sf-equipment">
+          <div class="eq-btn" onclick="toggleEquipment(this)" data-value="Dry Van" style="background:var(--900);border:.5px solid rgba(255,255,255,.12);padding:.85rem .5rem;text-align:center;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--400);user-select:none">Dry Van</div>
+          <div class="eq-btn" onclick="toggleEquipment(this)" data-value="Reefer" style="background:var(--900);border:.5px solid rgba(255,255,255,.12);padding:.85rem .5rem;text-align:center;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--400);user-select:none">Reefer</div>
+          <div class="eq-btn" onclick="toggleEquipment(this)" data-value="Flatbed" style="background:var(--900);border:.5px solid rgba(255,255,255,.12);padding:.85rem .5rem;text-align:center;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--400);user-select:none">Flatbed</div>
+          <div class="eq-btn" onclick="toggleEquipment(this)" data-value="Step Deck" style="background:var(--900);border:.5px solid rgba(255,255,255,.12);padding:.85rem .5rem;text-align:center;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--400);user-select:none">Step Deck</div>
+          <div class="eq-btn" onclick="toggleEquipment(this)" data-value="Power Only" style="background:var(--900);border:.5px solid rgba(255,255,255,.12);padding:.85rem .5rem;text-align:center;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--400);user-select:none">Power Only</div>
+          <div class="eq-btn" onclick="toggleEquipment(this)" data-value="Not Sure" style="background:var(--900);border:.5px solid rgba(255,255,255,.12);padding:.85rem .5rem;text-align:center;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--400);user-select:none">Not Sure</div>
         </div>
+        <input type="hidden" id="sf-equipment-val" name="equipment_required" value="">
       </div>
 
       <!-- Special Requirements -->
