@@ -1,9 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>RileyCooper Group — Freight Business Accelerator</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -673,53 +675,476 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 .hero-animate .actions{animation:heroFadeUp 0.7s var(--ease-out) 0.6s both}
 .hero-animate .hero-img{animation:heroFadeUp 0.9s var(--ease-out) 0.35s both}
 
+/* ── Desktop: hide mobile-only elements ─── */
+.mob-sticky-cta,.mob-market-scroll,.mob-scroll-hint,.mob-growth-ladder{display:none}
+
 /* ══ RED LINE REVEAL ══ */
 @keyframes redLineDown{from{height:0;opacity:0}to{height:100%;opacity:1}}
 .founder-photo-wrap::before{animation:redLineDown 1s var(--ease-out) 0.5s both}
 
-/* ══ RESPONSIVE ══ */
+/* ══════════════════════════════════════════════════════════════════════
+   RCG MOBILE — Intentional. Premium. Action-Oriented.
+   Designed as a native application experience, not a compressed desktop.
+   "If the desktop feels like entering a private office,
+    the mobile should feel like carrying that office in your pocket."
+   
+   TYPOGRAPHY RULES (non-negotiable):
+   - Cormorant Garamond: headlines only, 40px minimum
+   - Inter: all body copy, 16px minimum (prevents iOS zoom on inputs)
+   - DM Mono: labels only, 11px minimum
+   - Line height: 1.7 minimum for body, 1.1 for display
+══════════════════════════════════════════════════════════════════════ */
 @media(max-width:768px){
+
+  /* ── Reset & base ────────────────────────────────────────────────── */
+  *{-webkit-tap-highlight-color:transparent}
+  body{font-size:16px;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+
+  /* ── Mobile font floor: override tiny inline font-sizes ─────────────
+     All body/label text floors at 11px minimum on mobile.
+     This catches inline style="font-size:Xpx" where X < 11.
+     Does NOT affect Cormorant Garamond display sizes (those are large).
+  ──────────────────────────────────────────────────────────────────── */
+  [style*="font-size:6px"],[style*="font-size:6.5px"],
+  [style*="font-size:7px"],[style*="font-size:7.5px"],
+  [style*="font-size:8px"],[style*="font-size:8.5px"],
+  [style*="font-size:9px"],[style*="font-size:9.5px"],
+  [style*="font-size:10px"],[style*="font-size:10.5px"]{
+    font-size:11px!important;
+    letter-spacing:.08em;
+  }
+  /* Body-weight inline text floors at 14px */
+  [style*="font-size:11px"],[style*="font-size:12px"],[style*="font-size:13px"]{
+    font-size:14px!important;
+  }
+  /* Standard body copy floors at 16px */
+  [style*="font-size:14px"],[style*="font-size:14.5px"],[style*="font-size:15px"]{
+    font-size:16px!important;
+    line-height:1.75;
+  }
+
+  /* ── Nav — 56px, minimal ─────────────────────────────────────────── */
+  .nav{height:56px;background:rgba(8,8,8,0.99);backdrop-filter:blur(12px)}
+  .nav-inner{height:56px;padding:0 1.25rem}
   .nav-links,.nav-cta{display:none}
-  .nav-hamburger{display:flex}
-  .nav-inner{padding:0 1.5rem}
+  .nav-hamburger{display:flex;gap:5px;align-items:center}
+  .nav-hamburger span{width:18px;height:1.5px;background:var(--300)}
+  .nav-wm{font-size:12px;letter-spacing:.16em}
+
+  /* ── Mobile menu — full screen, large Cormorant type ─────────────── */
+  .mobile-menu{
+    top:56px;
+    padding:0;
+    gap:0;
+    background:rgba(8,8,8,1);
+    min-height:calc(100vh - 56px);
+    flex-direction:column;
+    justify-content:space-between;
+    overflow:hidden;
+  }
+  .mobile-menu.open{display:flex}
+  .mm-link{
+    font-family:var(--display);
+    font-size:clamp(30px,8vw,44px);
+    font-weight:600;
+    letter-spacing:.01em;
+    text-transform:uppercase;
+    color:var(--400);
+    padding:1.1rem 1.5rem;
+    border-bottom:.5px solid rgba(255,255,255,.06);
+    cursor:pointer;
+    transition:color 0.15s,padding-left 0.15s;
+    line-height:1.15;
+  }
+  .mm-link:active{color:var(--white);padding-left:calc(1.5rem + 8px)}
+  .mm-menu-footer{
+    padding:1.75rem 1.5rem 2.5rem;
+    border-top:.5px solid rgba(255,255,255,.06);
+  }
+  .mm-cta{
+    width:100%;
+    padding:1rem 1.25rem;
+    font-size:12px;
+    letter-spacing:.14em;
+    background:var(--red);
+    border:none;
+    color:#fff;
+    font-family:var(--body);
+    font-weight:500;
+    text-transform:uppercase;
+    cursor:pointer;
+    margin-bottom:.875rem;
+  }
+  .mm-tagline{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-align:center;
+  }
+
+  /* ── Ticker ─────────────────────────────────────────────────────── */
   .ticker-label-txt{display:none}
-  .ticker-label{padding:0 10px}
-  .ticker-cta-btn{padding:0 12px;font-size:7px}
-  .page{padding-top:92px}
-  section{padding:3.5rem 1.5rem}
-  .wells-band,.std-section,.ma-band,.compound-band,.commit-band,.ask-band,.shipper-portal-band,.platform-callout,.founder-section{padding-left:1.5rem;padding-right:1.5rem}
-  h1.dh{font-size:clamp(38px,10vw,62px)}
-  h2.dh{font-size:clamp(24px,6.5vw,38px)}
-  .two-col,.wells-inner,.std-inner,.spb-header,.pc-inner,.founder-layout{grid-template-columns:1fr;gap:2.5rem}
-  .pc-left{border-right:none;border-bottom:.5px solid rgba(255,255,255,.07);padding-bottom:3rem}
-  .proven-grid,.compound-4,.metrics-4,.m-strip{grid-template-columns:repeat(2,1fr)}
-  .splits-3{grid-template-columns:1fr}
-  .traits-grid,.phil-tension,.growth-4,.bottom-row,.rv-body,.p-layout{grid-template-columns:1fr}
-  .proven-footer{grid-template-columns:1fr}
-  .pf-item{padding:1rem 0;border-right:none;border-bottom:.5px solid rgba(255,255,255,.07);text-align:left}
-  .pf-item:last-child{border-bottom:none}
+  .ticker-label{padding:0 8px}
+  .ticker-cta-btn{display:none}
+  .ticker-item{font-size:9px}
+
+  /* ── Sticky CTA bar ─────────────────────────────────────────────── */
+  .mob-sticky-cta{
+    display:flex;
+    position:fixed;
+    bottom:0;left:0;right:0;
+    z-index:500;
+    background:var(--black);
+    border-top:.5px solid rgba(255,255,255,.09);
+    padding:.875rem 1.25rem;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+    padding-bottom:calc(.875rem + env(safe-area-inset-bottom));
+  }
+  .mob-sticky-btn{
+    flex:1;
+    background:var(--red);
+    color:#fff;
+    border:none;
+    padding:.85rem 1rem;
+    font-family:var(--body);
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    cursor:pointer;
+    text-align:center;
+    -webkit-appearance:none;
+  }
+
+  /* ── Page & section spacing ─────────────────────────────────────── */
+  .page{padding-top:88px;padding-bottom:80px}
+  section{padding:3rem 1.25rem}
+  .wells-band,.std-section,.ma-band,.compound-band,.commit-band,.ask-band,
+  .shipper-portal-band,.platform-callout,.founder-section{padding-left:1.25rem;padding-right:1.25rem}
+  .cta-band{padding:4rem 1.25rem}
+  .read-col{padding:0 1.25rem}
+  .pa-hero{padding:3rem 1.25rem 2.5rem;min-height:auto}
+
+  /* ── Mobile hero (homepage only) ─────────────────────────────────── */
+  .desk-hero{display:none!important}
+  .mob-hero{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    min-height:calc(100vh - 88px);
+    padding:3rem 1.25rem 5rem;
+  }
+  .mob-hero-eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--red);
+    margin-bottom:1.25rem;
+  }
+  .mob-hero-h1{
+    font-family:var(--display);
+    font-size:clamp(44px,13vw,68px);
+    font-weight:600;
+    color:var(--white);
+    text-transform:uppercase;
+    line-height:1.0;
+    letter-spacing:-.01em;
+    margin-bottom:1.75rem;
+  }
+  .mob-hero-h1 em{
+    font-style:italic;
+    color:var(--300);
+    font-weight:400;
+  }
+  .mob-hero-sub{
+    font-family:var(--body);
+    font-size:17px;
+    color:var(--300);
+    line-height:1.75;
+    margin-bottom:2.5rem;
+    max-width:340px;
+  }
+  .mob-hero-sub strong{color:var(--white);font-weight:500}
+  .mob-hero-cta{
+    background:var(--red);
+    color:#fff;
+    border:none;
+    padding:1.1rem 1.75rem;
+    font-family:var(--body);
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    cursor:pointer;
+    width:100%;
+    text-align:center;
+    margin-bottom:1.5rem;
+    -webkit-appearance:none;
+  }
+  .mob-hero-scroll{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--500);
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+
+  /* ── Typography scale ────────────────────────────────────────────── */
+  h1.dh{font-size:clamp(40px,11vw,64px);line-height:1.0;letter-spacing:-.01em}
+  h2.dh{font-size:clamp(30px,8vw,44px);line-height:1.05;letter-spacing:-.005em}
+  .eyebrow{font-size:10px;letter-spacing:.18em;margin-bottom:1rem}
+  .sec-label{font-size:10px;letter-spacing:.16em}
+  /* Body copy — 16px minimum, never smaller */
+  p,.hero-sub{font-size:16px;line-height:1.8}
+  .hero-quote{font-size:clamp(18px,5vw,24px);line-height:1.5}
+  /* Mono labels — 11px minimum */
+  .mc-lbl{font-size:11px;letter-spacing:.1em}
+  .panel-title{font-size:12px;letter-spacing:.1em}
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .actions{flex-direction:column;align-items:stretch;gap:.875rem}
+  .actions .btn-r,.actions .btn-o{
+    text-align:center;
+    padding:1rem 1.5rem;
+    font-size:12px;
+    letter-spacing:.13em;
+    -webkit-appearance:none;
+  }
+  .btn-r,.btn-o{
+    padding:.95rem 1.5rem;
+    font-size:12px;
+    letter-spacing:.13em;
+    -webkit-appearance:none;
+  }
+
+  /* ── Layout — all grids to single column ──────────────────────────── */
+  .two-col,.wells-inner,.std-inner,.spb-header,.pc-inner,.founder-layout{
+    grid-template-columns:1fr;gap:2rem
+  }
+  .pc-left{border-right:none;border-bottom:.5px solid rgba(255,255,255,.07);padding-bottom:2.5rem}
+  .splits-3,.traits-grid,.phil-tension,.growth-4,.bottom-row,.rv-body,.p-layout{
+    grid-template-columns:1fr
+  }
   .field-row{grid-template-columns:1fr}
-  .chart-row{grid-template-columns:1fr}
-  .rate-row{grid-template-columns:1fr 1fr}
-  .mkt-grid,.reg-grid{grid-template-columns:repeat(2,1fr)}
   .foot-grid{grid-template-columns:1fr;gap:2rem}
-  .foot-bottom{flex-direction:column;gap:.6rem}
-  .actions{flex-direction:column;align-items:stretch}
-  .actions .btn-r,.actions .btn-o{text-align:center}
-  .read-col{padding:0 1.5rem}
-  .pa-hero{padding:3.5rem 1.5rem 3rem;min-height:auto}
-  .cta-band{padding:5rem 1.5rem}
+  .foot-bottom{flex-direction:column;gap:.5rem;align-items:flex-start}
+  .stack-row-3,.stack-row-2{grid-template-columns:1fr}
+
+  /* ── Proven / compound cards — 2 col ──────────────────────────────── */
+  .proven-grid,.compound-4,.metrics-4{grid-template-columns:repeat(2,1fr)}
+  .proven-card,.infra-item,.gc,.cc,.trait{padding:1.5rem 1.25rem}
+
+  /* ── Proven footer stats ──────────────────────────────────────────── */
+  .proven-footer{grid-template-columns:1fr}
+  .pf-item{
+    padding:1.25rem 0;
+    border-right:none;
+    border-bottom:.5px solid rgba(255,255,255,.07);
+    text-align:left;
+  }
+  .pf-item:last-child{border-bottom:none}
+  .pf-val{font-size:clamp(34px,9vw,50px);line-height:1}
+  .pf-lbl{font-size:13px;line-height:1.5;margin-top:.4rem}
+
+  /* ── Private Access — ceremonial ─────────────────────────────────── */
+  .pa-hero{min-height:55vh;display:flex;flex-direction:column;justify-content:center}
+  .pa-emblem{width:60px;height:60px;font-size:22px}
+  .founder-stats{grid-template-columns:repeat(3,1fr)}
+  .fs-val{font-size:clamp(28px,8vw,40px)}
+  .fs-lbl{font-size:11px;line-height:1.5}
+
+  /* ── Forms — full screen on mobile ──────────────────────────────── */
+  .field input,.field select,.field textarea{
+    font-size:16px!important; /* Prevent iOS auto-zoom on focus */
+    padding:.85rem 1rem;
+  }
+  .field label{font-size:13px}
+
+  /* ── Intent modal — full screen, vertically centered ────────────── */
+  #intentModal{padding:0;align-items:flex-start}
+  #intentModal > div{
+    min-height:100vh;
+    width:100%;
+    max-width:100%;
+    padding:2rem 1.25rem 6rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  #intentModal > div > div[style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr!important;
+    gap:.875rem;
+  }
+  #intentModal > div > div[style*="text-align:center"]{
+    margin-bottom:2rem;
+  }
+
+  /* ── Shipper modal — slide-up sheet ─────────────────────────────── */
+  #shipperModal{padding:0;align-items:flex-end}
+  #shipperModal > div{
+    min-height:90vh;
+    width:100%;
+    max-width:100%;
+    padding:1.75rem 1.25rem 6rem;
+    border-radius:0;
+  }
+  #shipperModal input,
+  #shipperModal select,
+  #shipperModal textarea{font-size:16px!important}
+
+  /* ── Video modal ─────────────────────────────────────────────────── */
+  #videoModal{padding:.75rem}
+
+  /* ── Market Intelligence — swipeable native cards ────────────────── */
+  .m-strip,.rate-row,.chart-row,.bottom-row{display:none}
+  .db-header{flex-direction:column;gap:.6rem;align-items:flex-start;margin-bottom:.5rem}
+  .db-title{font-size:17px;line-height:1.3}
+  .db-sub{display:none}
+  .tab-bar{
+    overflow-x:auto;
+    scrollbar-width:none;
+    white-space:nowrap;
+    padding:0 1.25rem;
+    -webkit-overflow-scrolling:touch;
+  }
+  .tab-bar::-webkit-scrollbar{display:none}
+  .mob-market-scroll{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:1rem 1.25rem 1.25rem;
+    display:flex;
+    gap:.875rem;
+    scroll-snap-type:x mandatory;
+    -ms-overflow-style:none;
+  }
+  .mob-market-scroll::-webkit-scrollbar{display:none}
+  .mob-mkt-card{
+    scroll-snap-align:start;
+    flex:0 0 calc(85vw);
+    max-width:320px;
+    background:var(--800);
+    border:.5px solid rgba(255,255,255,.08);
+    padding:1.5rem 1.25rem;
+  }
+  .mob-mkt-card-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--500);
+    margin-bottom:.875rem;
+  }
+  .mob-mkt-card-val{
+    font-family:var(--display);
+    font-size:clamp(38px,10vw,54px);
+    font-weight:600;
+    color:var(--white);
+    line-height:1;
+    margin-bottom:.35rem;
+  }
+  .mob-mkt-card-unit{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--400);
+    letter-spacing:.08em;
+  }
+  .mob-mkt-card-delta{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    margin-top:.875rem;
+    padding:.4rem .75rem;
+    display:inline-block;
+  }
+  .mob-mkt-card-delta.up{background:rgba(58,143,90,.12);color:#4db874}
+  .mob-mkt-card-delta.dn{background:rgba(212,84,84,.12);color:#d45454}
+  .mob-mkt-card-delta.fl{background:rgba(82,82,82,.15);color:var(--400)}
+  .mob-mkt-card-source{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:1rem;
+    padding-top:.875rem;
+    border-top:.5px solid rgba(255,255,255,.06);
+  }
+  .mob-scroll-hint{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--500);
+    padding:.25rem 1.25rem .5rem;
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .mob-scroll-hint::after{content:'→';color:var(--red)}
+
+  /* ── Growth ladder — vertical progression ────────────────────────── */
+  .mob-growth-ladder{display:flex;flex-direction:column;gap:0}
+  .mob-ladder-step{
+    padding:1.75rem 1.25rem;
+    background:var(--800);
+    border-left:2px solid transparent;
+    position:relative;
+    transition:border-color 0.2s;
+  }
+  .mob-ladder-step+.mob-ladder-step{margin-top:1px}
+  .mob-ladder-step.active-step{border-left-color:var(--red)}
+  .mob-ladder-pct{
+    font-family:var(--display);
+    font-size:clamp(52px,14vw,72px);
+    font-weight:600;
+    color:var(--white);
+    line-height:1;
+    margin-bottom:.25rem;
+  }
+  .mob-ladder-pct span{font-size:.5em;color:var(--400);font-weight:400}
+  .mob-ladder-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--500);
+    margin-bottom:.75rem;
+  }
+  .mob-ladder-desc{font-size:16px;color:var(--400);line-height:1.75}
+  .mob-ladder-arrow{
+    font-family:var(--mono);
+    font-size:22px;
+    color:var(--red);
+    text-align:center;
+    padding:.6rem 0;
+    background:var(--900);
+    letter-spacing:.1em;
+  }
+
+  /* ── ShipOps / heavy density content — hide ─────────────────────── */
+  .so-layout{display:none}
+  .so-sidebar,.so-detail{display:none}
+
+  /* ── Misc layout fixes ───────────────────────────────────────────── */
+  .snode::before{display:none}
+  .rv-panel{max-height:none}
+  .mkt-grid,.reg-grid{grid-template-columns:1fr}
+  .chart-row{grid-template-columns:1fr}
   .p-stats{grid-template-columns:1fr 1fr}
   .p-table-head,.p-row{grid-template-columns:80px 60px 1fr 60px 60px}
   .p-th:nth-child(3),.p-cell:nth-child(3){display:none}
   .p-th:nth-child(4),.p-cell:nth-child(4){display:none}
-  .stack-row-3{grid-template-columns:1fr}
-  .stack-row-2{grid-template-columns:1fr}
-  .snode::before{display:none}
-  .rv-panel{max-height:none}
-  .so-layout{grid-template-columns:1fr;min-height:auto}
-  .so-sidebar,.so-detail{display:none}
-  .founder-stats{grid-template-columns:1fr}
+  .mc-val{font-size:clamp(28px,7vw,38px)}
+
 }
 @media(min-width:1025px) and (max-width:1240px){
   .nav-inner{padding:0 1.5rem}
@@ -770,7 +1195,16 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
   <div class="mm-link" onclick="go('growth');closeMenu()">Growth &amp; Expansion</div>
   <div class="mm-link" onclick="go('shippers');closeMenu()">For Shippers</div>
   <div class="mm-link" onclick="go('market');closeMenu()">Market Intelligence</div>
+  <div class="mm-menu-footer">
+    <button class="mm-cta" onclick="openIntentModal();closeMenu()">Start A Conversation</button>
+    <div class="mm-tagline">Freight Business Accelerator · rcgrp.co</div>
+  </div>
   <button class="mm-cta" onclick="openIntentModal();closeMenu()">Request Private Access</button>
+</div>
+
+<!-- STICKY MOBILE CTA — visible only on mobile -->
+<div class="mob-sticky-cta">
+  <button class="mob-sticky-btn" onclick="openIntentModal()">Start A Conversation</button>
 </div>
 
 <!-- TICKER -->
@@ -806,7 +1240,17 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 
 <!-- ═══ HOME ═══ -->
 <div class="page active" id="page-home">
-  <div style="min-height:90vh;display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1360px;margin:0 auto;padding:5rem 2.5rem;align-items:center" class="two-col hero-animate" id="homeHero">
+  <!-- Mobile hero (shown only on mobile via CSS) -->
+  <div class="mob-hero" id="mobHomeHero">
+    <div class="mob-hero-eyebrow">Freight Business Accelerator</div>
+    <h1 class="mob-hero-h1">Build a 7-Figure<br><em>Freight Business.</em></h1>
+    <p class="mob-hero-sub">No salary. No ceiling. No non-compete.<br><strong>Just ownership.</strong></p>
+    <button class="mob-hero-cta" onclick="openIntentModal()">Start A Conversation</button>
+    <div class="mob-hero-scroll">↓ <span>Scroll to explore</span></div>
+  </div>
+
+  <!-- Desktop hero (hidden on mobile via CSS) -->
+  <div style="min-height:90vh;display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1360px;margin:0 auto;padding:5rem 2.5rem;align-items:center" class="two-col hero-animate desk-hero" id="homeHero">
     <div>
       <div class="eyebrow">Freight Business Accelerator</div>
       <h1 class="dh" style="margin-bottom:1.75rem">Build a 7-Figure<br><em>Freight Business.</em></h1>
@@ -908,6 +1352,32 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
         <div class="stat-block"><div class="stat-num">50/50</div><div class="stat-label">Entry Split — Agent Path</div></div>
         <div class="stat-block"><div class="stat-num">60/40</div><div class="stat-label">Expansion Path — Top Operators</div></div>
         <div class="stat-block"><div class="stat-num">100%</div><div class="stat-label">Book Ownership — Always the Agent's</div></div>
+      </div>
+
+      <!-- MOBILE GROWTH LADDER — vertical progression (hidden on desktop) -->
+      <div class="mob-growth-ladder">
+        <div class="mob-ladder-step active-step">
+          <div class="mob-ladder-label">Entry — Agent Path</div>
+          <div class="mob-ladder-pct">50<span>/50</span></div>
+          <div class="mob-ladder-desc">Equal partnership from day one. You build the book, RCG provides the platform. Every load you move is yours.</div>
+        </div>
+        <div class="mob-ladder-arrow">↓</div>
+        <div class="mob-ladder-step">
+          <div class="mob-ladder-label">Growth — Established Operators</div>
+          <div class="mob-ladder-pct">55<span>/45</span></div>
+          <div class="mob-ladder-desc">Performance is rewarded. As your book scales, your split improves. The platform's cost stays fixed while your upside grows.</div>
+        </div>
+        <div class="mob-ladder-arrow">↓</div>
+        <div class="mob-ladder-step">
+          <div class="mob-ladder-label">Expansion — Top Operators</div>
+          <div class="mob-ladder-pct">60<span>/40</span></div>
+          <div class="mob-ladder-desc">The best operators earn the best economics. No ceiling. No politics. Just compounding returns on compounding effort.</div>
+        </div>
+        <div style="padding:1.5rem 1.25rem;background:var(--black);border-top:.5px solid rgba(255,255,255,.06);margin-top:1px">
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem">Always</div>
+          <div style="font-family:var(--display);font-size:22px;font-weight:600;color:var(--white)">100% Book Ownership</div>
+          <div style="font-size:13px;color:var(--400);line-height:1.7;margin-top:.5rem">Your book is yours. No matter what. That's not a benefit — it's the foundation.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1259,6 +1729,67 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
   <div style="background:var(--black);margin-top:2.5rem;padding-bottom:3rem">
     <div class="db-header"><div><div class="db-title">RCG Market Terminal</div><div class="db-sub">Freight Intelligence — North America — v3.0</div></div><div class="db-live"><div class="db-live-dot"></div>EIA &amp; FRED Data &nbsp;|&nbsp; Last Updated: <span id="db-timestamp">—</span></div></div>
     <div class="tab-bar"><div class="tab active">Overview</div><div class="tab">Spot Rates</div><div class="tab">Capacity</div><div class="tab">Fuel &amp; FSC</div><div class="tab">Regional</div></div>
+
+    <!-- MOBILE MARKET WIDGET CARDS — swipeable, hidden on desktop -->
+    <div class="mob-market-scroll" style="padding-top:1.5rem">
+      <!-- Card 1: Diesel -->
+      <div class="mob-mkt-card">
+        <div class="mob-mkt-card-label">Today's Diesel</div>
+        <div class="mob-mkt-card-val" id="mob-diesel">$5.06</div>
+        <div class="mob-mkt-card-unit">per gallon · national avg</div>
+        <div class="mob-mkt-card-delta dn" id="mob-diesel-delta">↓ Falling</div>
+        <div class="mob-mkt-card-source">Source: EIA · Updated weekly</div>
+      </div>
+      <!-- Card 2: FSC -->
+      <div class="mob-mkt-card">
+        <div class="mob-mkt-card-label">Fuel Surcharge (FSC)</div>
+        <div class="mob-mkt-card-val" id="mob-fsc">43.2</div>
+        <div class="mob-mkt-card-unit">% of linehaul · current week</div>
+        <div class="mob-mkt-card-delta fl" id="mob-fsc-delta">→ Unchanged</div>
+        <div class="mob-mkt-card-source">Calibrated to Saia LTL table</div>
+      </div>
+      <!-- Card 3: Dry Van Spot -->
+      <div class="mob-mkt-card">
+        <div class="mob-mkt-card-label">Dry Van Spot Rate</div>
+        <div class="mob-mkt-card-val">$2.71</div>
+        <div class="mob-mkt-card-unit">per mile · national avg</div>
+        <div class="mob-mkt-card-delta dn">↓ −$0.02 wk/wk</div>
+        <div class="mob-mkt-card-source">DAT · Illustrative</div>
+      </div>
+      <!-- Card 4: Reefer Spot -->
+      <div class="mob-mkt-card">
+        <div class="mob-mkt-card-label">Reefer Spot Rate</div>
+        <div class="mob-mkt-card-val">$3.18</div>
+        <div class="mob-mkt-card-unit">per mile · national avg</div>
+        <div class="mob-mkt-card-delta up">↑ +$0.06 wk/wk</div>
+        <div class="mob-mkt-card-source">DAT · Illustrative</div>
+      </div>
+      <!-- Card 5: Flatbed Spot -->
+      <div class="mob-mkt-card">
+        <div class="mob-mkt-card-label">Flatbed Spot Rate</div>
+        <div class="mob-mkt-card-val">$3.42</div>
+        <div class="mob-mkt-card-unit">per mile · national avg</div>
+        <div class="mob-mkt-card-delta up">↑ +$0.09 wk/wk</div>
+        <div class="mob-mkt-card-source">DAT · Illustrative</div>
+      </div>
+      <!-- Card 6: Freight Index -->
+      <div class="mob-mkt-card">
+        <div class="mob-mkt-card-label">Freight Volume Index</div>
+        <div class="mob-mkt-card-val" id="mob-freight">138.7</div>
+        <div class="mob-mkt-card-unit">Cass Freight Index</div>
+        <div class="mob-mkt-card-delta up" id="mob-freight-delta">↑ +0.6 mo/mo</div>
+        <div class="mob-mkt-card-source">FRED · Monthly</div>
+      </div>
+      <!-- Card 7: WTI Crude -->
+      <div class="mob-mkt-card">
+        <div class="mob-mkt-card-label">WTI Crude Oil</div>
+        <div class="mob-mkt-card-val" id="mob-crude">$95.00</div>
+        <div class="mob-mkt-card-unit">per barrel</div>
+        <div class="mob-mkt-card-delta up" id="mob-crude-delta">↑ +$0.68</div>
+        <div class="mob-mkt-card-source">FRED · Daily</div>
+      </div>
+    </div>
+    <div class="mob-scroll-hint">Swipe for more indicators</div>
     <div class="m-strip">
       <div class="mc acc"><div class="mc-lbl">Natl Avg Rate / Mile</div><div><span class="mc-val">.84</span></div><div class="mc-delta up">↑ +1.4% wk/wk</div><div class="mc-sub">All modes blended</div></div>
       <div class="mc"><div class="mc-lbl">Fuel Surcharge (FSC)</div><div><span class="mc-val" id="mc-fsc">18.5</span><span class="mc-unit">%</span></div><div class="mc-delta" id="mc-fsc-delta">→ Unchanged</div><div class="fsc-note">Applied to base linehaul<br><span id="mc-fsc-period">Effective Jun 8 – Jun 14</span></div></div>
@@ -1679,6 +2210,71 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { closeIntentModal(); closeShipperModal(); closeVideoModal(); }
 });
 
+// ══ MOBILE RESPONSIVE SHOW/HIDE ══
+function applyMobileLayout() {
+  var isMobile = window.innerWidth <= 768;
+  // Market widget cards
+  var scroll = document.querySelector('.mob-market-scroll');
+  var hint = document.querySelector('.mob-scroll-hint');
+  if (scroll) scroll.style.display = isMobile ? 'flex' : 'none';
+  if (hint) hint.style.display = isMobile ? 'block' : 'none';
+  // Growth ladder
+  var ladder = document.querySelector('.mob-growth-ladder');
+  var statBlocks = document.querySelector('.stagger.reveal-right');
+  if (ladder) ladder.style.display = isMobile ? 'flex' : 'none';
+  if (statBlocks) statBlocks.style.display = isMobile ? 'none' : '';
+  // Sticky CTA bar
+  var stickyCta = document.querySelector('.mob-sticky-cta');
+  if (stickyCta) stickyCta.style.display = isMobile ? 'flex' : 'none';
+}
+applyMobileLayout();
+window.addEventListener('resize', applyMobileLayout);
+
+// ══ MOBILE MARKET DATA WIRING ══
+// Called from applyData() — populates mobile cards with live data
+function applyMobileMarketData(data) {
+  var setText = function(id, val) {
+    var el = document.getElementById(id);
+    if (el && val != null) el.textContent = val;
+  };
+  if (data.diesel_price) {
+    setText('mob-diesel', '$' + parseFloat(data.diesel_price).toFixed(2));
+    var dTrend = data.diesel_trend || 'stable';
+    var dEl = document.getElementById('mob-diesel-delta');
+    if (dEl) {
+      dEl.textContent = dTrend === 'rising' ? '↑ Rising' : dTrend === 'falling' ? '↓ Falling' : '→ Stable';
+      dEl.className = 'mob-mkt-card-delta ' + (dTrend === 'rising' ? 'up' : dTrend === 'falling' ? 'dn' : 'fl');
+    }
+  }
+  if (data.fsc_pct != null) {
+    setText('mob-fsc', parseFloat(data.fsc_pct).toFixed(1));
+    var fEl = document.getElementById('mob-fsc-delta');
+    var fd = data.fsc_delta || 0;
+    if (fEl) {
+      fEl.textContent = fd > 0 ? '↑ +' + Math.abs(fd).toFixed(1) + '% wk/wk' : fd < 0 ? '↓ −' + Math.abs(fd).toFixed(1) + '% wk/wk' : '→ Unchanged';
+      fEl.className = 'mob-mkt-card-delta ' + (fd > 0 ? 'up' : fd < 0 ? 'dn' : 'fl');
+    }
+  }
+  if (data.freight_index != null) {
+    setText('mob-freight', parseFloat(data.freight_index).toFixed(1));
+    var fi = data.freight_index_delta || 0;
+    var fiEl = document.getElementById('mob-freight-delta');
+    if (fiEl) {
+      fiEl.textContent = (fi >= 0 ? '↑ +' : '↓ −') + Math.abs(fi).toFixed(1) + ' mo/mo';
+      fiEl.className = 'mob-mkt-card-delta ' + (fi >= 0 ? 'up' : 'dn');
+    }
+  }
+  if (data.crude_wti != null) {
+    setText('mob-crude', '$' + parseFloat(data.crude_wti).toFixed(2));
+    var cd = data.crude_wti_delta || 0;
+    var cdEl = document.getElementById('mob-crude-delta');
+    if (cdEl) {
+      cdEl.textContent = (cd >= 0 ? '↑ +$' : '↓ −$') + Math.abs(cd).toFixed(2);
+      cdEl.className = 'mob-mkt-card-delta ' + (cd >= 0 ? 'up' : 'dn');
+    }
+  }
+}
+
 // ══ VIDEO MODAL ══
 function openVideoModal() {
   const modal = document.getElementById('videoModal');
@@ -1965,6 +2561,8 @@ window.addEventListener('DOMContentLoaded', () => {
         setText('pa-revenue', revStr);
       }
     }
+    // Wire live data to mobile market cards
+    applyMobileMarketData(data);
   }
 
   // ── Fetch market.json ──────────────────────────────────────────────────────
