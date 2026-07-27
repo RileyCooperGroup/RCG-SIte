@@ -185,8 +185,8 @@ h2.dh{font-family:var(--display);font-size:clamp(28px,4vw,54px);font-weight:600;
 .pv-age{font-family:var(--display);font-size:42px;font-weight:600;color:var(--white);line-height:1;margin-bottom:.35rem}
 .pv-label{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--500);margin-bottom:1rem}
 .pv-body{font-size:12px;color:var(--400);line-height:1.7}
-.proven-footer{background:var(--800);border-top:.5px solid rgba(255,255,255,.07);padding:2rem;display:grid;grid-template-columns:repeat(2,1fr);margin-top:1px}
-.pf-item{padding:0 1.5rem;border-right:.5px solid rgba(255,255,255,.07);text-align:center}
+.proven-footer{background:var(--800);border-top:.5px solid rgba(255,255,255,.07);padding:2rem;display:flex;justify-content:center;margin-top:1px}
+.pf-item{padding:0 2rem;text-align:center}
 .pf-item:first-child{padding-left:0}
 .pf-item:last-child{border-right:none}
 .pf-val{font-family:var(--display);font-size:24px;font-weight:600;color:var(--white);margin-bottom:.2rem}
@@ -1407,7 +1407,6 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
     </div>
     <div class="proven-footer reveal">
       <div class="pf-item"><div class="pf-val" id="pf-sixfig">100%</div><div class="pf-lbl">Of Full-Time Agents Earning Six Figures+</div></div>
-      <div class="pf-item"><div class="pf-val" id="pf-loads">2,500+</div><div class="pf-lbl">Loads Booked <span id="pf-asof" style="font-size:0.6em;color:var(--500)">(2026 YTD)</span></div></div>
     </div>
   </section>
 
@@ -2553,14 +2552,12 @@ window.addEventListener('DOMContentLoaded', () => {
       }
       if (bs.loads_booked_ytd != null) {
         var loadsStr = Number(bs.loads_booked_ytd).toLocaleString() + '+';
-        setText('pf-loads', loadsStr);
         setText('pa-loads', loadsStr);
       }
       if (bs.loads_booked_as_of) {
         try {
           var asOfDate = new Date(bs.loads_booked_as_of + 'T12:00:00Z');
           var yr = asOfDate.getFullYear();
-          setText('pf-asof', '(' + yr + ' YTD)');
           setText('pa-asof', '(' + yr + ' YTD)');
         } catch(e) {}
       }
