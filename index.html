@@ -46,24 +46,26 @@ body{background:var(--900);color:var(--white);font-family:var(--body);font-size:
 .stagger.visible>*:nth-child(8){opacity:1;transform:translateY(0);transition-delay:560ms}
 
 /* ══ NAV ══ */
-nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(8,8,8,0.97);backdrop-filter:blur(16px);border-bottom:0.5px solid rgba(255,255,255,0.06);transition:background 0.3s}
-.nav-inner{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;height:60px;max-width:1360px;margin:0 auto;padding:0 2.5rem}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(8,8,8,0.97);backdrop-filter:blur(16px);transition:background 0.3s}
+.nav-inner{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;height:48px;max-width:1360px;margin:0 auto;padding:0 2.5rem}
 .nav-spacer{display:none}
 .nav-logo{display:flex;align-items:center;cursor:pointer;flex-shrink:0;transition:opacity 0.2s;margin-right:2.5rem}
 .nav-logo:hover{opacity:0.8}
 .nav-wm{font-family:var(--body);font-size:12.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--white)}
 .nav-wm span{color:inherit}
 .nav-links{display:flex;gap:1.5rem;align-items:center}
+/* Second nav row — CTA bar */
+.nav-cta-bar{background:rgba(8,8,8,0.97);border-bottom:.5px solid rgba(158,13,0,0.25);height:32px;display:flex;align-items:center;padding:0 2.5rem}
 .nav-link{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--400);cursor:pointer;transition:color 0.18s;white-space:nowrap;padding:4px 0;position:relative}
 .nav-link::after{content:'';position:absolute;bottom:-1px;left:0;right:100%;height:1px;background:var(--red);transition:right 0.3s var(--ease-out)}
 .nav-link:hover{color:var(--white)}
 .nav-link:hover::after,.nav-link.active::after{right:0}
 .nav-link.active{color:var(--white)}
-.nav-cta{font-family:var(--body);font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);border:0.5px solid var(--red);padding:8px 16px;cursor:pointer;transition:all 0.22s var(--ease-out);white-space:nowrap;flex-shrink:0;position:relative;overflow:hidden;z-index:1}
-.nav-cta::before{content:'';position:absolute;inset:0;background:var(--red);transform:translateX(-101%);transition:transform 0.22s var(--ease-out)}
-.nav-cta:hover{color:#fff}
-.nav-cta:hover::before{transform:translateX(0)}
-.nav-cta span{position:relative;z-index:1}
+.nav-cta{font-family:var(--mono);font-size:9.5px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);cursor:pointer;transition:color 0.18s;white-space:nowrap;display:flex;align-items:center;gap:.5rem}
+.nav-cta::after{content:'→';transition:transform 0.2s var(--ease-out);display:inline-block}
+.nav-cta:hover{color:var(--red2)}
+.nav-cta:hover::after{transform:translateX(4px)}
+.nav-cta span{position:relative}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;flex-shrink:0}
 .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all 0.25s}
 .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
@@ -77,7 +79,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(8,8,8,0.97);
 .mm-cta:hover{background:var(--red2)}
 
 /* ══ TICKER ══ */
-.ticker-wrap{position:fixed;top:60px;left:0;right:0;z-index:299;background:var(--800);border-bottom:0.5px solid rgba(255,255,255,0.05);height:32px;display:flex;align-items:center;overflow:hidden}
+.ticker-wrap{position:fixed;top:80px;left:0;right:0;z-index:299;background:var(--800);border-bottom:0.5px solid rgba(255,255,255,0.05);height:32px;display:flex;align-items:center;overflow:hidden}
 .ticker-label{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 14px 0 18px;border-right:0.5px solid rgba(255,255,255,0.08);height:100%;background:var(--800);z-index:2}
 .ticker-label-txt{font-family:var(--mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--500);white-space:nowrap}
 .live-dot{width:5px;height:5px;border-radius:50%;background:#4db874;animation:blink 2s infinite;flex-shrink:0}
@@ -97,7 +99,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(8,8,8,0.97);
 .ticker-cta-btn:hover .tck-arrow{transform:translateX(4px)}
 
 /* ══ PAGE SYSTEM ══ */
-.page{display:none;padding-top:92px;min-height:100vh;opacity:0;transition:opacity 0.3s}
+.page{display:none;padding-top:112px;min-height:100vh;opacity:0;transition:opacity 0.3s}
 .page.active{display:block}
 .page.visible{opacity:1}
 
@@ -728,7 +730,7 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
   /* ── Nav — 56px, minimal ─────────────────────────────────────────── */
   .nav{height:56px;background:rgba(8,8,8,0.99);backdrop-filter:blur(12px)}
   .nav-inner{height:56px;padding:0 1.25rem}
-  .nav-links,.nav-cta{display:none}
+  .nav-links,.nav-cta,.nav-cta-bar{display:none}
   .nav-hamburger{display:flex;gap:5px;align-items:center}
   .nav-hamburger span{width:18px;height:1.5px;background:var(--300)}
   .nav-wm{font-size:12px;letter-spacing:.16em}
@@ -1180,9 +1182,8 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
 <!-- NAV -->
 <nav id="mainNav">
   <div class="nav-inner">
-        <div class="nav-logo" onclick="go('home')">
+    <div class="nav-logo" onclick="go('home')">
       <div class="nav-wm"><span style="color:#9E0D00">RILEY</span>COOPER GROUP</div>
-    </div>
     </div>
     <div class="nav-links">
       <div class="nav-link" id="nl-platform" onclick="go('platform')">The Platform</div>
@@ -1191,9 +1192,10 @@ footer{background:var(--black);border-top:.5px solid rgba(255,255,255,.07);paddi
       <div class="nav-link" id="nl-shippers" onclick="go('shippers')">For Shippers</div>
       <div class="nav-link" id="nl-market" onclick="go('market')">Market Intelligence</div>
     </div>
-    <div class="nav-spacer"></div>
-    <div class="nav-cta" id="navCta" onclick="openIntentModal()"><span>Start A Conversation</span></div>
     <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+  <div class="nav-cta-bar" id="navCtaBar">
+    <div class="nav-cta" id="navCta" onclick="openIntentModal()"><span>Start A Conversation</span></div>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
