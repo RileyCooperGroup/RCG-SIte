@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-03T13:31:53Z",
+  "fetched_at": "2026-08-04T12:50:43Z",
   "date": "2026-07-27",
   "date_prev": "2026-07-20",
   "diesel_price": 5.313,
@@ -14,8 +14,8 @@
   "crude_wti_date": "2026-07-27",
   "crude_wti_prev": 91.74,
   "crude_wti_delta": -7.49,
-  "freight_index": 139.6,
-  "freight_index_date": "2026-04-01",
-  "freight_index_prev": 139.2,
-  "freight_index_delta": 0.4
+  "freight_index": 136.7,
+  "freight_index_date": "2026-05-01",
+  "freight_index_prev": 138.5,
+  "freight_index_delta": -1.8
 }
