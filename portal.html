@@ -477,6 +477,7 @@ async function loadApp(user){
   currentUser=user;
   // Load agent profile
   const {data,error}=await sb.from('agents').select('*').eq('auth_id',user.id).single();
+  console.log('Agent profile loaded:', JSON.stringify(data), 'Error:', error?.message);
   if(error||!data){
     // Auto-create profile on first login
     const {data:newAgent}=await sb.from('agents').insert({
