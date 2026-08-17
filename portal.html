@@ -478,19 +478,30 @@ async function loadApp(user){
   // Load agent profile
   const {data,error}=await sb.from('agents').select('*').eq('auth_id',user.id).single();
   console.log('Agent profile loaded:', JSON.stringify(data), 'Error:', error?.message);
-  if(error||!data){
-    // Auto-create profile on first login
-    const {data:newAgent}=await sb.from('agents').insert({
-      auth_id:user.id,
-      full_name:user.user_metadata?.full_name||user.email.split('@')[0],
-      email:user.email,
-      status:'active'
-    }).select().single();
-    agentProfile=newAgent;
-  } else {
+  if(data){
     agentProfile=data;
-    // Update last login
-    await sb.from('agents').update({last_login_at:new Date().toISOString()}).eq('id',data.id);
+    // Update last login silently
+    sb.from('agents').update({last_login_at:new Date().toISOString()}).eq('id',data.id).then(()=>{});
+  } else {
+    // Profile not found or permission error — create minimal fallback profile
+    agentProfile={
+      id: null,
+      auth_id: user.id,
+      email: user.email,
+      full_name: user.user_metadata?.full_name || user.email.split('@')[0],
+      is_management: false,
+      status: 'active'
+    };
+    // Try to insert if it's genuinely missing (not a permission error)
+    if(!error || error.code === 'PGRST116'){
+      const {data:newAgent}=await sb.from('agents').insert({
+        auth_id:user.id,
+        full_name:user.user_metadata?.full_name||user.email.split('@')[0],
+        email:user.email,
+        status:'active'
+      }).select().single();
+      if(newAgent) agentProfile=newAgent;
+    }
   }
   // Log login
   if(agentProfile){
