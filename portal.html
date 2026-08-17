@@ -8,7 +8,7 @@
 <title>RCG Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.0/dist/umd/supabase.min.js"></script>
 <style>
 /* ═══════════════════════════════════════════════════════════════
    RCG PORTAL — Design System
@@ -318,6 +318,10 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <div class="field"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="btn btn-primary" style="width:100%;padding:.875rem;font-size:13px;letter-spacing:.1em" onclick="signIn()" id="login-btn">Sign In</button>
     <div class="login-footer">RILEYCOOPER GROUP · AGENT PORTAL · CONFIDENTIAL</div>
+    <div style="margin-top:1rem;text-align:center">
+      <span onclick="testConnection()" style="font-family:var(--mono);font-size:9px;color:var(--dim);cursor:pointer;letter-spacing:.08em;text-transform:uppercase">Test Connection</span>
+      <div id="conn-result" style="font-family:var(--mono);font-size:10px;margin-top:.4rem"></div>
+    </div>
   </div>
 </div>
 
@@ -420,6 +424,22 @@ function initials(name){
 }
 
 // ── Auth ──────────────────────────────────────────────────────
+async function testConnection(){
+  const el = document.getElementById('conn-result');
+  el.style.color = 'var(--muted)';
+  el.textContent = 'Testing...';
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/', {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    });
+    el.style.color = 'var(--green)';
+    el.textContent = '✓ Connected (HTTP ' + res.status + ')';
+  } catch(e) {
+    el.style.color = 'var(--signal)';
+    el.textContent = '✗ ' + e.message;
+  }
+}
+
 async function signIn(){
   const email=document.getElementById('login-email').value.trim();
   const password=document.getElementById('login-password').value;
