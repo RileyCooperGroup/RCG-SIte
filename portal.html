@@ -476,24 +476,39 @@ sb.auth.onAuthStateChange(async (event, session) => {
 async function loadApp(user){
   currentUser=user;
   // Load agent profile
-  const {data,error}=await sb.from('agents').select('*').eq('auth_id',user.id).single();
-  console.log('Agent profile loaded:', JSON.stringify(data), 'Error:', error?.message);
-  if(data){
-    agentProfile=data;
-    // Update last login silently
-    sb.from('agents').update({last_login_at:new Date().toISOString()}).eq('id',data.id).then(()=>{});
+  // Try to load agent profile with retries
+  let profileData = null;
+  let profileError = null;
+  
+  // First attempt
+  const res1 = await sb.from('agents').select('*').eq('auth_id',user.id).single();
+  profileData = res1.data;
+  profileError = res1.error;
+  
+  console.log('Agent profile loaded:', JSON.stringify(profileData), 'Error:', profileError?.message);
+  
+  if(profileData){
+    agentProfile=profileData;
+    sb.from('agents').update({last_login_at:new Date().toISOString()}).eq('id',profileData.id).then(()=>{});
   } else {
-    // Profile not found or permission error — create minimal fallback profile
-    agentProfile={
-      id: null,
-      auth_id: user.id,
-      email: user.email,
-      full_name: user.user_metadata?.full_name || user.email.split('@')[0],
-      is_management: false,
-      status: 'active'
-    };
-    // Try to insert if it's genuinely missing (not a permission error)
-    if(!error || error.code === 'PGRST116'){
+    // Permission denied or not found — use direct REST API call as fallback
+    try {
+      const fallbackRes = await fetch(SUPABASE_URL+'/rest/v1/agents?auth_id=eq.'+user.id+'&select=*', {
+        headers:{
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer '+(await sb.auth.getSession()).data.session?.access_token,
+          'Content-Type': 'application/json'
+        }
+      });
+      const fallbackData = await fallbackRes.json();
+      console.log('Fallback profile:', JSON.stringify(fallbackData));
+      if(Array.isArray(fallbackData) && fallbackData.length > 0){
+        agentProfile = fallbackData[0];
+      }
+    } catch(fe){ console.log('Fallback failed:', fe.message); }
+    
+    // If still no profile, create one
+    if(!agentProfile){
       const {data:newAgent}=await sb.from('agents').insert({
         auth_id:user.id,
         full_name:user.user_metadata?.full_name||user.email.split('@')[0],
@@ -501,6 +516,7 @@ async function loadApp(user){
         status:'active'
       }).select().single();
       if(newAgent) agentProfile=newAgent;
+      else agentProfile={auth_id:user.id,email:user.email,full_name:user.email.split('@')[0],is_management:false,status:'active'};
     }
   }
   // Log login
@@ -538,7 +554,7 @@ const adminNav=[
 ];
 
 function buildNav(){
-  const isAdmin=agentProfile?.is_management;
+  const isAdmin=agentProfile?.is_management===true||agentProfile?.is_management==='true'||agentProfile?.is_management===1;
   const links=isAdmin?adminNav:agentNav;
   const sb_nav=document.getElementById('sb-nav');
   const mob=document.getElementById('mob-nav-items');
