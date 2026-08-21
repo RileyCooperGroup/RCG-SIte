@@ -475,59 +475,80 @@ sb.auth.onAuthStateChange(async (event, session) => {
 
 async function loadApp(user){
   currentUser=user;
-  // Load agent profile
-  // Try to load agent profile with retries
-  let profileData = null;
-  let profileError = null;
-  
-  // First attempt
-  const res1 = await sb.from('agents').select('*').eq('auth_id',user.id).single();
-  profileData = res1.data;
-  profileError = res1.error;
-  
-  console.log('Agent profile loaded:', JSON.stringify(profileData), 'Error:', profileError?.message);
-  
-  if(profileData){
-    agentProfile=profileData;
-    sb.from('agents').update({last_login_at:new Date().toISOString()}).eq('id',profileData.id).then(()=>{});
-  } else {
-    // Permission denied or not found — use direct REST API call as fallback
-    try {
-      const fallbackRes = await fetch(SUPABASE_URL+'/rest/v1/agents?auth_id=eq.'+user.id+'&select=*', {
+
+  // Always show the app immediately — never block on profile load
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='flex';
+
+  // Set a safe default profile immediately so UI doesn't hang
+  agentProfile={
+    auth_id:user.id,
+    email:user.email,
+    full_name:user.email.split('@')[0],
+    is_management:false,
+    status:'active',
+    id:null
+  };
+  buildNav();
+  updateSidebarProfile();
+
+  // Now load the real profile in the background
+  try {
+    // Try REST API directly with session token — most reliable method
+    const session = await sb.auth.getSession();
+    const token = session?.data?.session?.access_token;
+    
+    if(token){
+      const res = await fetch(SUPABASE_URL+'/rest/v1/agents?auth_id=eq.'+user.id+'&select=*&limit=1', {
         headers:{
           'apikey': SUPABASE_KEY,
-          'Authorization': 'Bearer '+(await sb.auth.getSession()).data.session?.access_token,
-          'Content-Type': 'application/json'
+          'Authorization': 'Bearer '+token,
+          'Accept': 'application/json'
         }
       });
-      const fallbackData = await fallbackRes.json();
-      console.log('Fallback profile:', JSON.stringify(fallbackData));
-      if(Array.isArray(fallbackData) && fallbackData.length > 0){
-        agentProfile = fallbackData[0];
+      if(res.ok){
+        const rows = await res.json();
+        if(Array.isArray(rows) && rows.length > 0){
+          agentProfile = rows[0];
+          // Update last login silently
+          fetch(SUPABASE_URL+'/rest/v1/agents?id=eq.'+agentProfile.id, {
+            method:'PATCH',
+            headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+token,'Content-Type':'application/json','Prefer':'return=minimal'},
+            body:JSON.stringify({last_login_at:new Date().toISOString()})
+          }).catch(()=>{});
+        }
       }
-    } catch(fe){ console.log('Fallback failed:', fe.message); }
+    }
     
-    // If still no profile, create one
-    if(!agentProfile){
-      const {data:newAgent}=await sb.from('agents').insert({
+    // Fallback to supabase-js client
+    if(!agentProfile.id){
+      const {data} = await sb.from('agents').select('*').eq('auth_id',user.id).single();
+      if(data) agentProfile = data;
+    }
+    
+    // If still no record, create one (new agent first login)
+    if(!agentProfile.id){
+      const {data:newAgent} = await sb.from('agents').insert({
         auth_id:user.id,
         full_name:user.user_metadata?.full_name||user.email.split('@')[0],
         email:user.email,
         status:'active'
       }).select().single();
-      if(newAgent) agentProfile=newAgent;
-      else agentProfile={auth_id:user.id,email:user.email,full_name:user.email.split('@')[0],is_management:false,status:'active'};
+      if(newAgent) agentProfile = newAgent;
     }
+  } catch(e){
+    console.log('Profile load error (non-fatal):', e.message);
   }
-  // Log login
-  if(agentProfile){
-    await sb.from('activity_log').insert({agent_id:agentProfile.id,action_type:'login'});
-  }
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('app').style.display='flex';
+
+  // Rebuild nav with correct role now that we have real profile
   buildNav();
   updateSidebarProfile();
   nav('dashboard');
+
+  // Log login silently — never block on this
+  if(agentProfile?.id){
+    sb.from('activity_log').insert({agent_id:agentProfile.id,action_type:'login'}).catch(()=>{});
+  }
 }
 
 // ── Navigation ────────────────────────────────────────────────
