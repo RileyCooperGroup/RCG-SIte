@@ -573,7 +573,12 @@ const adminNav=[
 ];
 
 function buildNav(){
-  const isAdmin=agentProfile?.is_management===true||agentProfile?.is_management==='true'||agentProfile?.is_management===1;
+  // Admin by email — reliable fallback regardless of RLS timing
+  const ADMIN_EMAILS = ['rostofe@rcgrp.co', 'melani@rcgrp.co'];
+  const isAdmin = agentProfile?.is_management===true 
+    || agentProfile?.is_management==='true' 
+    || agentProfile?.is_management===1
+    || ADMIN_EMAILS.includes(agentProfile?.email);
   const links=isAdmin?adminNav:agentNav;
   const sb_nav=document.getElementById('sb-nav');
   const mob=document.getElementById('mob-nav-items');
