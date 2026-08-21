@@ -489,10 +489,8 @@ async function loadApp(user){
     status:'active',
     id:null
   };
-  buildNav();
-  updateSidebarProfile();
 
-  // Now load the real profile in the background
+  // Now load the real profile before building nav
   try {
     // Try REST API directly with session token — most reliable method
     const session = await sb.auth.getSession();
